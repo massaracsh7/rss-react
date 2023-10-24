@@ -1,2 +1,2 @@
 # rss-react
-rsschool react course repository
+RSSchool react course repository
