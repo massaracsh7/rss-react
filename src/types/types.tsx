@@ -29,7 +29,9 @@ export interface Character {
   created: string;
 }
 
+export type CharacterArray = Array<Character>;
+
 export interface ApiResponse {
   info: Info;
-  results: Character[];
+  results: CharacterArray;
 }
