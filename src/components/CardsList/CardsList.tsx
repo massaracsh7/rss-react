@@ -11,7 +11,6 @@ export default class CardsList extends Component<Props> {
     super(props);
   }
   render() {
-    console.log(this.props.charactArr);
     const arrayCharacters = this.props.charactArr;
     return (
       <ul className='cards__list'>

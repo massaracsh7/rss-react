@@ -9,3 +9,13 @@ export async function getCharacters() {
     return null;
   }
 }
+
+export async function searchCharacters(query: string) {
+  try {
+    const res: Response = await fetch(`https://rickandmortyapi.com/api/character/?name=${query}`);
+    const data: ApiResponse = await res.json();
+    return data.results;
+  } catch {
+    return null;
+  }
+}
