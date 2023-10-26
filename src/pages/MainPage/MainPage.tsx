@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
 import CardsList from '../../components/CardsList/CardsList';
+import { SearchInput } from '../../components/Search/SerachInput';
 import { CharacterArray } from '../../types/types';
 import { getCharacters } from '../../utils/api';
 
@@ -26,7 +27,11 @@ export default class MainPage extends Component {
     const charactArr = this.state.characters;
     return (
       <div className='main-page'>
-        <h1>Header1</h1>
+        <h1>Rick & Morty Characters</h1>
+        <form>
+          <SearchInput />
+          <button type='submit'>🔍</button>
+        </form>
         <CardsList charactArr={charactArr} />
       </div>
     );
