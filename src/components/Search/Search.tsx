@@ -1,18 +1,23 @@
 import { Component } from 'react';
 
-export interface PropsSearch {
+interface PropsSearch {
   setSearch: (searchStr: string) => void;
   search: string;
+  handleSubmit: () => void;
 }
-export class SearchInput extends Component<PropsSearch> {
+export default class SearchInput extends Component<PropsSearch> {
   handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { setSearch } = this.props;
     setSearch((e.target as HTMLInputElement).value.toLowerCase().trim());
   };
+
   render() {
     return (
       <>
-        <input autoFocus type='search' value={this.props.search} onChange={this.handleChange} />
+        <form onSubmit={this.props.handleSubmit}>
+          <input autoFocus type='search' value={this.props.search} onChange={this.handleChange} />
+          <button type='submit'>🔍</button>
+        </form>
       </>
     );
   }

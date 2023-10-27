@@ -2,10 +2,12 @@ import { Component } from 'react';
 
 import './style.css';
 
-class Loader extends Component {
+export default class Loader extends Component {
   render() {
-    return <div className='spinner'>⌛</div>;
+    return (
+      <div className='spinner'>
+        <div className='react'>⌛</div>
+      </div>
+    );
   }
 }
-
-export default Loader;

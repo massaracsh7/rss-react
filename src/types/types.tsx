@@ -35,3 +35,10 @@ export interface ApiResponse {
   info: Info;
   results: CharacterArray;
 }
+
+export interface StateMainPage {
+  characters: CharacterArray;
+  search: string;
+  loading: boolean;
+  textError: string;
+}

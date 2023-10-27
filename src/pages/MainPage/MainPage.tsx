@@ -1,19 +1,15 @@
 import { Component } from 'react';
 
+import ButtonReload from '../../components/Buttons/ButtonReload';
 import CardsList from '../../components/CardsList/CardsList';
+import Header from '../../components/Header/Header';
 import Loader from '../../components/Loader/Loader';
-import { SearchInput } from '../../components/Search/SerachInput';
-import { CharacterArray } from '../../types/types';
+import Search from '../../components/Search/Search';
+import { StateMainPage } from '../../types/types';
 import { getCharacters, searchCharacters } from '../../utils/api';
 
-interface State {
-  characters: CharacterArray;
-  search: string;
-  loading: boolean;
-  textError: string;
-}
 export default class MainPage extends Component {
-  state: State = {
+  state: StateMainPage = {
     characters: [],
     search: localStorage.getItem('textQuery') ?? '',
     loading: false,
@@ -32,7 +28,7 @@ export default class MainPage extends Component {
       } else {
         this.setState({
           loading: false,
-          textError: 'Sorry, Your character is not found. Try again, please.',
+          textError: 'Sorry, Your character is not found. Please, ',
         });
         localStorage.setItem('textQuery', '');
       }
@@ -58,16 +54,18 @@ export default class MainPage extends Component {
     const { loading, textError, characters } = this.state;
     return (
       <div className='main-page'>
-        <button onClick={this.createError}>Create Error</button>
-        <h1>Rick & Morty Characters</h1>
-        <form onSubmit={this.handleSubmit}>
-          <SearchInput search={this.state.search} setSearch={this.handleSearchInput} />
-          <button type='submit'>🔍</button>
-        </form>
+        <Header createError={this.createError} />
+        <Search
+          handleSubmit={this.handleSubmit}
+          search={this.state.search}
+          setSearch={this.handleSearchInput}
+        />
         {loading ? (
           <Loader />
         ) : textError !== '' ? (
-          <div>{textError}</div>
+          <div>
+            {textError} <ButtonReload />
+          </div>
         ) : (
           <CardsList charactArr={characters} />
         )}
