@@ -10,15 +10,18 @@ interface State {
   characters: CharacterArray;
   search: string;
   loading: boolean;
+  textError: string;
 }
 export default class MainPage extends Component {
   state: State = {
     characters: [],
     search: localStorage.getItem('textQuery') ?? '',
-    loading: true,
+    loading: false,
+    textError: '',
   };
 
   async componentDidMount() {
+    this.setState({ loading: true });
     try {
       const data =
         this.state.search === ''
@@ -26,11 +29,21 @@ export default class MainPage extends Component {
           : await searchCharacters(this.state.search);
       if (data) {
         this.setState({ characters: [...data], loading: false });
+      } else {
+        this.setState({
+          loading: false,
+          textError: 'Sorry, Your character is not found. Try again, please.',
+        });
+        localStorage.setItem('textQuery', '');
       }
     } catch (error) {
       console.error('Failed to load data', error);
     }
   }
+
+  createError = () => {
+    this.setState({ characters: false });
+  };
 
   handleSubmit = () => {
     localStorage.setItem('textQuery', this.state.search);
@@ -42,16 +55,22 @@ export default class MainPage extends Component {
   };
 
   render() {
-    const charactArr = this.state.characters;
-    const loading = this.state.loading;
+    const { loading, textError, characters } = this.state;
     return (
       <div className='main-page'>
+        <button onClick={this.createError}>Create Error</button>
         <h1>Rick & Morty Characters</h1>
         <form onSubmit={this.handleSubmit}>
           <SearchInput search={this.state.search} setSearch={this.handleSearchInput} />
           <button type='submit'>🔍</button>
         </form>
-        {loading ? <Loader /> : <CardsList charactArr={charactArr} />}
+        {loading ? (
+          <Loader />
+        ) : textError !== '' ? (
+          <div>{textError}</div>
+        ) : (
+          <CardsList charactArr={characters} />
+        )}
       </div>
     );
   }
