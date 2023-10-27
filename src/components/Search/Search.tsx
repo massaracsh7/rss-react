@@ -1,5 +1,7 @@
 import { Component } from 'react';
 
+import './style.css';
+
 interface PropsSearch {
   setSearch: (searchStr: string) => void;
   search: string;
@@ -14,8 +16,14 @@ export default class SearchInput extends Component<PropsSearch> {
   render() {
     return (
       <>
-        <form onSubmit={this.props.handleSubmit}>
-          <input autoFocus type='search' value={this.props.search} onChange={this.handleChange} />
+        <form className='search__form' onSubmit={this.props.handleSubmit}>
+          <input
+            className='search__input'
+            autoFocus
+            type='search'
+            value={this.props.search}
+            onChange={this.handleChange}
+          />
           <button type='submit'>🔍</button>
         </form>
       </>

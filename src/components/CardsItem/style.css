@@ -1,0 +1,19 @@
+.cards__item {
+  position: relative;
+  padding: 10px;
+  border-radius: 7px;
+  border: 2px solid #ffa500;
+  box-shadow: 0 0 10px #f5d67b,
+    0 0 20px #f5d67b;
+}
+
+.cards__status {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: orange;
+  padding: 5px;
+  border-radius: 3px;
+  font-weight: 600;
+  color: #fff;
+}

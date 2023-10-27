@@ -1,6 +1,7 @@
 import { Component, ErrorInfo } from 'react';
 
-import ButtonReload from '../components/Buttons/ButtonReload';
+import ButtonReload from '../Buttons/ButtonReload';
+import './style.css';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -28,8 +29,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     if (this.state.hasError) {
       return (
         <>
-          <h1>Something went wrong.</h1>
-          <ButtonReload />
+          <div className='error-page'>
+            <h1 className='error-page__title'>Something went wrong.</h1>
+            <ButtonReload />
+          </div>
         </>
       );
       console.error(this.props.children);

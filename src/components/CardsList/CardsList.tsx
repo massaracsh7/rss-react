@@ -2,6 +2,7 @@ import { Component } from 'react';
 
 import CardsItem from '../../components/CardsItem/CardsItem';
 import { CharacterArray } from '../../types/types';
+import './style.css';
 
 interface Props {
   charactArr: CharacterArray;

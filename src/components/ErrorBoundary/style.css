@@ -1,0 +1,9 @@
+.error-page {
+  margin-top: 10%;
+}
+
+.error-page__title {
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px #878787;
+  font-size: 36px;
+}

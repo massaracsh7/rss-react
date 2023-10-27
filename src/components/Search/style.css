@@ -1,0 +1,15 @@
+.search__form {
+  margin-bottom: 20px;
+}
+
+.search__input {
+  width: 40%;
+  margin-right: 10px;
+  border-radius: 7px;
+  padding: 7px;
+  transition: box-shadow 0.3s;
+}
+
+.search__input:hover {
+  box-shadow: 0 0 5px #656565;
+}
