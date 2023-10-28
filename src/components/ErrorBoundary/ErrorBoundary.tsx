@@ -35,7 +35,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
           </div>
         </>
       );
-      console.error(this.props.children);
     }
 
     return this.props.children;
