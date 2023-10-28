@@ -17,3 +17,7 @@
   font-weight: 600;
   color: #fff;
 }
+
+.cards__img {
+  width: 100%;
+}

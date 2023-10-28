@@ -13,3 +13,15 @@
 .search__input:hover {
   box-shadow: 0 0 5px #656565;
 }
+
+@media (max-width: 768px) {
+  .search__input {
+    width: 80%;
+  }
+}
+
+@media (max-width: 380px) {
+  .search__input {
+    width: 70%;
+  }
+}

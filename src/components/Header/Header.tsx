@@ -15,8 +15,10 @@ export default class Header extends Component<Props> {
     return (
       <>
         <header className='header'>
-          <button onClick={this.props.createError}>Create Error</button>
-          <h1>Rick & Morty Characters</h1>
+          <button className='button-error' onClick={this.props.createError}>
+            Create Error
+          </button>
+          <h1 className='header__title'>Rick & Morty Characters</h1>
         </header>
       </>
     );

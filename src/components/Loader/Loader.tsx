@@ -6,7 +6,8 @@ export default class Loader extends Component {
   render() {
     return (
       <div className='spinner'>
-        <div className='react'>⌛</div>
+        <p>Loading...</p>
+        <div className='circle'></div>
       </div>
     );
   }

@@ -13,7 +13,7 @@ export default class CardsItem extends Component<Character> {
         <div className='cards__info'>
           <h4 className='cards__name'>{this.props.name}</h4>
           <div>
-            <img src={this.props.image} />
+            <img className='cards__img' src={this.props.image} />
           </div>
           <p className='cards__status'> {this.props.status}</p>
           <p>
