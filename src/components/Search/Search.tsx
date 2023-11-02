@@ -1,5 +1,3 @@
-import { Component } from 'react';
-
 import './style.css';
 
 interface PropsSearch {
@@ -7,26 +5,22 @@ interface PropsSearch {
   search: string;
   handleSubmit: () => void;
 }
-export default class SearchInput extends Component<PropsSearch> {
-  handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const { setSearch } = this.props;
+export default function SearchInput({ setSearch, search, handleSubmit }: PropsSearch) {
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setSearch((e.target as HTMLInputElement).value.toLowerCase().trim());
   };
-
-  render() {
-    return (
-      <>
-        <form className='search__form' onSubmit={this.props.handleSubmit}>
-          <input
-            className='search__input'
-            autoFocus
-            type='search'
-            value={this.props.search}
-            onChange={this.handleChange}
-          />
-          <button type='submit'>🔍</button>
-        </form>
-      </>
-    );
-  }
+  return (
+    <>
+      <form className='search__form' onSubmit={handleSubmit}>
+        <input
+          className='search__input'
+          autoFocus
+          type='search'
+          value={search}
+          onChange={handleChange}
+        />
+        <button type='submit'>🔍</button>
+      </form>
+    </>
+  );
 }

@@ -1,35 +1,32 @@
-import { Component } from 'react';
-
 import { Character } from '../../types/types';
 import './style.css';
 
-export default class CardsItem extends Component<Character> {
-  constructor(props: Character) {
-    super(props);
-  }
-  render() {
-    return (
-      <li className='cards__item'>
-        <div className='cards__info'>
-          <h4 className='cards__name'>{this.props.name}</h4>
-          <div>
-            <img className='cards__img' src={this.props.image} />
-          </div>
-          <p className='cards__status'> {this.props.status}</p>
-          <p>
-            <b>Gender:</b> {this.props.gender}
-          </p>
-          <p>
-            <b>Species:</b> {this.props.species}
-          </p>
-          <p>
-            <b>Loctaion:</b> {this.props.location.name}
-          </p>
-          <p>
-            <b>Origin:</b> {this.props.origin.name}
-          </p>
+interface Props {
+  character: Character;
+}
+
+export default function CardsItem({ character }: Props) {
+  return (
+    <li className='cards__item'>
+      <div className='cards__info'>
+        <h4 className='cards__name'>{character.name}</h4>
+        <div>
+          <img className='cards__img' src={character.image} />
         </div>
-      </li>
-    );
-  }
+        <p className='cards__status'> {character.status}</p>
+        <p>
+          <b>Gender:</b> {character.gender}
+        </p>
+        <p>
+          <b>Species:</b> {character.species}
+        </p>
+        <p>
+          <b>Loctaion:</b> {character.location.name}
+        </p>
+        <p>
+          <b>Origin:</b> {character.origin.name}
+        </p>
+      </div>
+    </li>
+  );
 }

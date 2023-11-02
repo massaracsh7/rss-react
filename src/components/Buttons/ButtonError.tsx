@@ -1,29 +1,29 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 
 import './style.css';
 
-interface State {
-  error: boolean;
-}
+export default function ButtonReload() {
+  const [isError, setError] = useState(false);
 
-export default class ButtonError extends Component {
-  state: State = { error: false };
-  createError = () => {
-    this.setState({ error: true });
+  const createError = () => {
+    setError(true);
   };
 
-  componentDidUpdate() {
-    console.log(this.state.error);
-    if (this.state.error) {
-      throw new Error('Error was created');
-    }
-  }
+  useEffect(() => {
+    const updateError = () => {
+      console.log(isError);
+      if (isError) {
+        throw new Error('Error was created');
+      }
+    };
+    updateError();
+  }, [isError]);
 
-  render() {
-    return (
-      <button className='button-error' onClick={this.createError}>
+  return (
+    <>
+      <button className='button-error' onClick={createError}>
         Create Error
       </button>
-    );
-  }
+    </>
+  );
 }
