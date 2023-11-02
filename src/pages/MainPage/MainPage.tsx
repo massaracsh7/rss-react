@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { ButtonReload } from '../../components/Buttons';
 import { CardsList } from '../../components/CardsList';
@@ -49,6 +50,7 @@ export default function MainPage() {
       <Search handleSubmit={handleSubmit} search={search} setSearch={handleSearchInput} />
 
       <div className='main__flex'>
+        <Outlet />
         {loading ? (
           <Loader />
         ) : textError !== '' ? (
