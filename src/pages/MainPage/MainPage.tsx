@@ -1,10 +1,10 @@
 import { Component } from 'react';
 
-import ButtonReload from '../../components/Buttons/ButtonReload';
-import CardsList from '../../components/CardsList/CardsList';
-import Header from '../../components/Header/Header';
-import Loader from '../../components/Loader/Loader';
-import Search from '../../components/Search/Search';
+import { ButtonReload } from '../../components/Buttons';
+import { CardsList } from '../../components/CardsList';
+import { Header } from '../../components/Header';
+import { Loader } from '../../components/Loader';
+import { Search } from '../../components/Search';
 import { StateMainPage } from '../../types/types';
 import { getCharacters, searchCharacters } from '../../utils/api';
 
@@ -37,10 +37,6 @@ export default class MainPage extends Component {
     }
   }
 
-  createError = () => {
-    this.setState({ characters: false });
-  };
-
   handleSubmit = () => {
     localStorage.setItem('textQuery', this.state.search);
   };
@@ -54,7 +50,7 @@ export default class MainPage extends Component {
     const { loading, textError, characters } = this.state;
     return (
       <div className='main-page'>
-        <Header createError={this.createError} />
+        <Header />
         <Search
           handleSubmit={this.handleSubmit}
           search={this.state.search}

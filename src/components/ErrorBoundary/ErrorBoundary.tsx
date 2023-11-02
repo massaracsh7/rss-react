@@ -1,18 +1,18 @@
 import { Component, ErrorInfo } from 'react';
 
-import ButtonReload from '../Buttons/ButtonReload';
+import { ButtonReload } from '../Buttons';
 import './style.css';
 
-interface ErrorBoundaryProps {
+interface ErrorProps {
   children: React.ReactNode;
 }
 
-interface ErrorBoundaryState {
+interface ErrorState {
   hasError: boolean;
 }
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+export default class ErrorBoundary extends Component<ErrorProps, ErrorState> {
+  constructor(props: ErrorProps) {
     super(props);
     this.state = { hasError: false };
   }
@@ -40,5 +40,3 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     return this.props.children;
   }
 }
-
-export default ErrorBoundary;
