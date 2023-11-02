@@ -1,9 +1,11 @@
-import { Component } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import MainPage from './pages/MainPage/MainPage';
 
-export default class App extends Component {
-  render() {
-    return <MainPage />;
-  }
+export default function App() {
+  return (
+    <Routes>
+      <Route path='/' element={<MainPage />} />
+    </Routes>
+  );
 }

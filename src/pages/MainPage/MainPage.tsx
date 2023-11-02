@@ -1,61 +1,54 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ButtonReload } from '../../components/Buttons';
 import { CardsList } from '../../components/CardsList';
 import { Header } from '../../components/Header';
 import { Loader } from '../../components/Loader';
 import { Search } from '../../components/Search';
-import { StateMainPage } from '../../types/types';
+import { CharacterArray } from '../../types/types';
 import { getCharacters, searchCharacters } from '../../utils/api';
 
-export default class MainPage extends Component {
-  state: StateMainPage = {
-    characters: [],
-    search: localStorage.getItem('textQuery') ?? '',
-    loading: false,
-    textError: '',
-  };
+export default function MainPage() {
+  const [search, setSearch] = useState(localStorage.getItem('textQuery') ?? '');
+  const [loading, setLoading] = useState(false);
+  const [textError, setError] = useState('');
+  const [characters, setCharacters] = useState<CharacterArray>([]);
 
-  async componentDidMount() {
-    this.setState({ loading: true });
-    try {
-      const data =
-        this.state.search === ''
-          ? await getCharacters()
-          : await searchCharacters(this.state.search);
-      if (data) {
-        this.setState({ characters: [...data], loading: false });
-      } else {
-        this.setState({
-          loading: false,
-          textError: 'Sorry, Your character is not found. Please, ',
-        });
-        localStorage.setItem('textQuery', '');
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      try {
+        const data = search === '' ? await getCharacters() : await searchCharacters(search);
+        if (data) {
+          setCharacters(data);
+          setLoading(false);
+        } else {
+          setLoading(false);
+          setError('Sorry, Your character is not found. Please, ');
+          localStorage.setItem('textQuery', '');
+        }
+      } catch (error) {
+        console.error('Failed to load data', error);
       }
-    } catch (error) {
-      console.error('Failed to load data', error);
-    }
-  }
+    };
+    getData();
+  }, [search]);
 
-  handleSubmit = () => {
-    localStorage.setItem('textQuery', this.state.search);
+  const handleSubmit = () => {
+    localStorage.setItem('textQuery', search);
   };
 
-  handleSearchInput = (searchText: string) => {
-    this.setState({ search: searchText });
-    localStorage.setItem('textQuery', this.state.search);
+  const handleSearchInput = (searchText: string) => {
+    setSearch(searchText);
+    localStorage.setItem('textQuery', search);
   };
 
-  render() {
-    const { loading, textError, characters } = this.state;
-    return (
-      <div className='main-page'>
-        <Header />
-        <Search
-          handleSubmit={this.handleSubmit}
-          search={this.state.search}
-          setSearch={this.handleSearchInput}
-        />
+  return (
+    <div className='main-page'>
+      <Header />
+      <Search handleSubmit={handleSubmit} search={search} setSearch={handleSearchInput} />
+
+      <div className='main__flex'>
         {loading ? (
           <Loader />
         ) : textError !== '' ? (
@@ -66,6 +59,6 @@ export default class MainPage extends Component {
           <CardsList charactArr={characters} />
         )}
       </div>
-    );
-  }
+    </div>
+  );
 }
