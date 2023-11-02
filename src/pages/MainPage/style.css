@@ -1,3 +1,4 @@
 .main__flex {
   display: flex;
+  gap: 100px;
 }

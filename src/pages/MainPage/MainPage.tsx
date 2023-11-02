@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { ButtonReload } from '../../components/Buttons';
 import { CardsList } from '../../components/CardsList';
@@ -8,6 +9,7 @@ import { Loader } from '../../components/Loader';
 import { Search } from '../../components/Search';
 import { CharacterArray } from '../../types/types';
 import { getCharacters, searchCharacters } from '../../utils/api';
+import './style.css';
 
 export default function MainPage() {
   const [search, setSearch] = useState(localStorage.getItem('textQuery') ?? '');
@@ -58,7 +60,9 @@ export default function MainPage() {
             {textError} <ButtonReload />
           </div>
         ) : (
-          <CardsList charactArr={characters} />
+          <Link to={`/`}>
+            <CardsList charactArr={characters} />
+          </Link>
         )}
       </div>
     </div>

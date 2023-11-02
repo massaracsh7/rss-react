@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Character } from '../../types/types';
 import { getCharacter } from '../../utils/api';
@@ -46,7 +47,8 @@ export default function DetailPage() {
   }, [prodId]);
 
   return (
-    <div className='cards__page'>
+    <div className='cards__detail'>
+      <Link to={`/`}>Close</Link>
       <div className='cards__info'>
         <h4 className='cards__name'>{character.name}</h4>
         <div>

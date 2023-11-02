@@ -1,4 +1,6 @@
-.cards__page {
+.cards__detail {
   position: relative;
   width: 300px;
+  border: 5px dotted orange;
+  padding: 50px;
 }
