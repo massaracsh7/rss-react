@@ -6,6 +6,7 @@ import { CardsList } from '../../components/CardsList';
 import { Header } from '../../components/Header';
 import { Loader } from '../../components/Loader';
 import Pagination from '../../components/Pagination/Pagination';
+import PerPage from '../../components/PerPage/PerPage';
 import { Search } from '../../components/Search';
 import { CharacterArray } from '../../types/types';
 import { getCharacters } from '../../utils/api';
@@ -26,6 +27,7 @@ export default function MainPage() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page') || '1';
+  const [countItems, setCountItems] = useState('20');
 
   useEffect(() => {
     const getData = async () => {
@@ -48,7 +50,7 @@ export default function MainPage() {
       }
     };
     getData();
-  }, [currentPage, search, setSearchParams]);
+  }, [currentPage, search, setSearchParams, setCountItems]);
 
   const handleSubmit = () => {
     localStorage.setItem('textQuery', search);
@@ -57,6 +59,15 @@ export default function MainPage() {
   const handleSearchInput = (searchText: string) => {
     setSearch(searchText);
     localStorage.setItem('textQuery', search);
+  };
+
+  const handleCountItems = (num: string) => {
+    setCountItems(num);
+    setCurrentPage(
+      search
+        ? `https://rickandmortyapi.com/api/character/?name=${search}`
+        : `https://rickandmortyapi.com/api/character?page=1`,
+    );
   };
 
   function putNextPage() {
@@ -78,8 +89,8 @@ export default function MainPage() {
         putPrevPage={putPrevPage}
         num={page}
       />
+      <PerPage setCountItems={handleCountItems} />
       <div className='main__flex'>
-        <Outlet />
         {loading ? (
           <Loader />
         ) : textError !== '' ? (
@@ -87,8 +98,9 @@ export default function MainPage() {
             {textError} <ButtonReload />
           </div>
         ) : (
-          <CardsList charactArr={characters} />
+          <CardsList charactArr={characters} countItems={countItems} />
         )}
+        <Outlet />
       </div>
     </div>
   );
