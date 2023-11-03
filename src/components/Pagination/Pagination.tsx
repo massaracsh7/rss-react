@@ -1,3 +1,5 @@
+import './style.css';
+
 interface Props {
   nextPage: string | null | undefined;
   prevPage: string | null | undefined;
@@ -7,13 +9,13 @@ interface Props {
 }
 export default function Pagination({ prevPage, nextPage, putNextPage, putPrevPage, num }: Props) {
   return (
-    <div>
+    <div className='pages'>
       {prevPage ? (
-        <button onClick={putPrevPage}>Previous</button>
+        <button onClick={putPrevPage}>Prev</button>
       ) : (
         <button disabled={true}>Prev</button>
       )}
-      {num}
+      <span className='pages__num'>{num}</span>
       {nextPage ? (
         <button onClick={putNextPage}>Next</button>
       ) : (

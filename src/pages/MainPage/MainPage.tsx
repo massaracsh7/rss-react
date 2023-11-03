@@ -5,8 +5,8 @@ import { ButtonReload } from '../../components/Buttons';
 import { CardsList } from '../../components/CardsList';
 import { Header } from '../../components/Header';
 import { Loader } from '../../components/Loader';
-import Pagination from '../../components/Pagination/Pagination';
-import PerPage from '../../components/PerPage/PerPage';
+import { Pagination } from '../../components/Pagination';
+import { PerPage } from '../../components/PerPage';
 import { Search } from '../../components/Search';
 import { CharacterArray } from '../../types/types';
 import { getCharacters } from '../../utils/api';
@@ -82,14 +82,16 @@ export default function MainPage() {
     <div className='main-page'>
       <Header />
       <Search handleSubmit={handleSubmit} search={search} setSearch={handleSearchInput} />
-      <Pagination
-        prevPage={prevPage}
-        nextPage={nextPage}
-        putNextPage={putNextPage}
-        putPrevPage={putPrevPage}
-        num={page}
-      />
-      <PerPage setCountItems={handleCountItems} />
+      <div className='main__flex'>
+        <Pagination
+          prevPage={prevPage}
+          nextPage={nextPage}
+          putNextPage={putNextPage}
+          putPrevPage={putPrevPage}
+          num={page}
+        />
+        <PerPage setCountItems={handleCountItems} />
+      </div>
       <div className='main__flex'>
         {loading ? (
           <Loader />

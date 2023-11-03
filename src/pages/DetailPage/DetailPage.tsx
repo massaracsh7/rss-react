@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +10,6 @@ import './style.css';
 export default function DetailPage() {
   const [character, setCharacter] = useState<Character>(defaultCharacter);
   const [loading, setLoading] = useState(false);
-  const rootEl = useRef(null);
   const params = useParams();
   const detailId = params.id ?? 0;
   useEffect(() => {
@@ -19,7 +18,6 @@ export default function DetailPage() {
       try {
         const data = await getCharacter(+detailId);
         if (data) {
-          console.log(data);
           setCharacter(data);
           setLoading(false);
         }
@@ -32,7 +30,7 @@ export default function DetailPage() {
   }, [detailId]);
 
   return (
-    <div className='cards__detail' ref={rootEl}>
+    <div className='cards__detail'>
       {loading ? (
         <Loader />
       ) : (
@@ -45,7 +43,6 @@ export default function DetailPage() {
             <img className='detail__img' src={character.image} />
           </div>
           <p>
-            {' '}
             <b>Status:</b>
             {character.status}
           </p>
