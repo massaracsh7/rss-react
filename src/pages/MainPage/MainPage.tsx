@@ -8,6 +8,7 @@ import { Loader } from '../../components/Loader';
 import { Pagination } from '../../components/Pagination';
 import { PerPage } from '../../components/PerPage';
 import { Search } from '../../components/Search';
+import { API_URL } from '../../constants/constants';
 import { CharacterArray } from '../../types/types';
 import { getCharacters } from '../../utils/api';
 import './style.css';
@@ -20,9 +21,7 @@ export default function MainPage() {
   const [nextPage, setNextPage] = useState<string | null>();
   const [prevPage, setPrevPage] = useState<string | null>();
   const [currentPage, setCurrentPage] = useState(
-    search
-      ? `https://rickandmortyapi.com/api/character/?name=${search}`
-      : `https://rickandmortyapi.com/api/character?page=1`,
+    search ? `${API_URL}/?name=${search}` : `${API_URL}?page=1`,
   );
 
   const [searchParams, setSearchParams] = useSearchParams();
