@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
 
 import { ButtonReload } from '../../components/Buttons';
@@ -60,22 +60,36 @@ export default function MainPage() {
     localStorage.setItem('textQuery', search);
   };
 
-  const handleCountItems = (num: string) => {
-    setCountItems(num);
-    setCurrentPage(
-      search
-        ? `https://rickandmortyapi.com/api/character/?name=${search}`
-        : `https://rickandmortyapi.com/api/character?page=1`,
-    );
-  };
+  const handleCountItems = useCallback(
+    (num: string) => {
+      setCountItems(num);
+      setCurrentPage(search ? `${API_URL}/?name=${search}` : `${API_URL}?page=1`);
+    },
+    [search],
+  );
 
-  function putNextPage() {
-    nextPage ? setCurrentPage(nextPage) : null;
-  }
+  const putNextPage = useCallback(() => {
+    if (nextPage) {
+      setCurrentPage(nextPage);
+    }
+  }, [nextPage]);
 
-  function putPrevPage() {
-    prevPage ? setCurrentPage(prevPage) : null;
-  }
+  const putPrevPage = useCallback(() => {
+    if (prevPage) {
+      setCurrentPage(prevPage);
+    }
+  }, [prevPage]);
+
+  const viewPage = useMemo(() => {
+    if (loading) return <Loader />;
+    if (textError !== '')
+      return (
+        <div>
+          {textError} <ButtonReload />
+        </div>
+      );
+    return <CardsList charactArr={characters} countItems={countItems} />;
+  }, [characters, countItems, loading, textError]);
 
   return (
     <div className='main-page'>
@@ -92,15 +106,7 @@ export default function MainPage() {
         <PerPage setCountItems={handleCountItems} />
       </div>
       <div className='main__flex'>
-        {loading ? (
-          <Loader />
-        ) : textError !== '' ? (
-          <div>
-            {textError} <ButtonReload />
-          </div>
-        ) : (
-          <CardsList charactArr={characters} countItems={countItems} />
-        )}
+        {viewPage}
         <Outlet />
       </div>
     </div>
