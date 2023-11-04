@@ -7,7 +7,7 @@ export default function App() {
   return (
     <Routes>
       <Route path='/' element={<MainPage />}>
-        <Route path='character/:id' element={<DetailPage />} />
+        <Route path='details=/:id' element={<DetailPage />} />
       </Route>
     </Routes>
   );
