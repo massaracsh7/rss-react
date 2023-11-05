@@ -11,7 +11,7 @@ import './libs/normalize.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <BrowserRouter basename={'/index.html'}>
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </ErrorBoundary>

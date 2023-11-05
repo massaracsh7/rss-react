@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { DetailInfo } from '../../components/DetailInfo';
 import { Loader } from '../../components/Loader';
 import { Character, defaultCharacter } from '../../types/types';
-import { GetRef } from '../../utils/GetRef';
 import { getCharacter } from '../../utils/api';
 import './style.css';
 
@@ -13,6 +12,7 @@ export default function DetailPage() {
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const detailId = params.id ?? 0;
+  const navigation = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -36,11 +36,14 @@ export default function DetailPage() {
     return <DetailInfo character={character} />;
   }, [character, loading]);
 
-  const ref = GetRef();
+  const goBack = () => {
+    navigation('/', { replace: true });
+  };
 
   return (
-    <div className='cards__detail' ref={ref}>
-      {viewDetails}
-    </div>
+    <>
+      <div className='cards__bg' onClick={goBack}></div>
+      <div className='cards__detail'>{viewDetails}</div>
+    </>
   );
 }
