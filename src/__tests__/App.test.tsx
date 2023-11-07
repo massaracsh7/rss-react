@@ -27,3 +27,12 @@ test('Check the header text', () => {
   const headerText = screen.getByText(/Rick & Morty Characters/i);
   expect(headerText).toBeInTheDocument();
 });
+
+test('error page', () => {
+  render(
+    <MemoryRouter initialEntries={['/123445']}>
+      <App />
+    </MemoryRouter>,
+  );
+  expect(screen.getByTestId('error-page')).toBeInTheDocument();
+});

@@ -31,7 +31,7 @@ export default function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page') || '1';
   const [countItems, setCountItems] = useState('20');
-  itemsContext.setItemsData(characters);
+
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
@@ -54,6 +54,10 @@ export default function MainPage() {
     };
     getData();
   }, [currentPage, search, setSearchParams, setCountItems]);
+
+  useEffect(() => {
+    itemsContext.setItemsData(characters);
+  }, [characters, itemsContext]);
 
   const handleSubmit = () => {
     localStorage.setItem('textQuery', search);
