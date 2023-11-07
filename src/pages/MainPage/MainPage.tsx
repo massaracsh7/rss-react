@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
 
 import { ButtonReload } from '../../components/Buttons';
@@ -9,12 +9,14 @@ import { Pagination } from '../../components/Pagination';
 import { PerPage } from '../../components/PerPage';
 import { Search } from '../../components/Search';
 import { API_URL } from '../../constants/constants';
+import { SearchContext } from '../../contexts/SearchContext';
 import { CharacterArray } from '../../types/types';
 import { getCharacters } from '../../utils/api';
 import './style.css';
 
 export default function MainPage() {
-  const [search, setSearch] = useState(localStorage.getItem('textQuery') ?? '');
+  const searchContext = useContext(SearchContext);
+  const [search, setSearch] = useState(searchContext.searchData);
   const [loading, setLoading] = useState(false);
   const [textError, setError] = useState('');
   const [characters, setCharacters] = useState<CharacterArray>([]);
@@ -53,11 +55,13 @@ export default function MainPage() {
 
   const handleSubmit = () => {
     localStorage.setItem('textQuery', search);
+    searchContext.setSearchData(search);
   };
 
   const handleSearchInput = (searchText: string) => {
     setSearch(searchText);
     localStorage.setItem('textQuery', search);
+    searchContext.setSearchData(search);
   };
 
   const handleCountItems = useCallback(
