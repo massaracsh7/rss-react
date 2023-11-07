@@ -1,13 +1,16 @@
+import { useContext } from 'react';
+
 import { CardsItem } from '../../components/CardsItem';
-import { CharacterArray } from '../../types/types';
+import { ItemsContext } from '../../contexts/ItemsContext';
 import './style.css';
 
 interface Props {
-  charactArr: CharacterArray;
   countItems: string;
 }
-export default function CardsList({ charactArr, countItems }: Props) {
-  const characts = charactArr !== false ? charactArr : [];
+export default function CardsList({ countItems }: Props) {
+  const itemsContext = useContext(ItemsContext);
+
+  const characts = itemsContext.itemsData !== false ? itemsContext.itemsData : [];
   return (
     <ul className='cards__list'>
       {characts.slice(0, +countItems).map((item) => (

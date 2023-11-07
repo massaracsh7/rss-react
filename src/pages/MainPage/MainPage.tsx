@@ -9,6 +9,7 @@ import { Pagination } from '../../components/Pagination';
 import { PerPage } from '../../components/PerPage';
 import { Search } from '../../components/Search';
 import { API_URL } from '../../constants/constants';
+import { ItemsContext } from '../../contexts/ItemsContext';
 import { SearchContext } from '../../contexts/SearchContext';
 import { CharacterArray } from '../../types/types';
 import { getCharacters } from '../../utils/api';
@@ -16,6 +17,7 @@ import './style.css';
 
 export default function MainPage() {
   const searchContext = useContext(SearchContext);
+  const itemsContext = useContext(ItemsContext);
   const [search, setSearch] = useState(searchContext.searchData);
   const [loading, setLoading] = useState(false);
   const [textError, setError] = useState('');
@@ -29,7 +31,7 @@ export default function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page') || '1';
   const [countItems, setCountItems] = useState('20');
-
+  itemsContext.setItemsData(characters);
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
@@ -92,8 +94,8 @@ export default function MainPage() {
           {textError} <ButtonReload />
         </div>
       );
-    return <CardsList charactArr={characters} countItems={countItems} />;
-  }, [characters, countItems, loading, textError]);
+    return <CardsList countItems={countItems} />;
+  }, [countItems, loading, textError]);
 
   return (
     <div className='main-page'>
