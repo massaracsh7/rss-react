@@ -2,7 +2,9 @@ import { MemoryRouter } from 'react-router-dom';
 
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
+import { CharacterAnswer } from '../mocks/CharacterListMock';
 import MainPage from '../pages/MainPage/MainPage';
 
 describe('Main page', () => {
@@ -16,25 +18,9 @@ describe('Main page', () => {
     expect(mainPage).toBeVisible();
   });
 
-  test('input event', () => {
-    render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>,
-    );
-    const searchInput = screen.getByTestId('search');
-    expect(searchInput).toContainHTML('');
-    fireEvent.input(searchInput, {
-      target: { value: 'test123123' },
-    });
-    expect(searchInput).toContainHTML('test123123');
-  });
-
   test('expects something to be set in localStorage', () => {
     jest.spyOn(Storage.prototype, 'setItem');
     Storage.prototype.setItem = jest.fn();
-    jest.spyOn(Storage.prototype, 'getItem');
-    Storage.prototype.getItem = jest.fn();
     render(
       <MemoryRouter>
         <MainPage />
@@ -65,6 +51,21 @@ describe('Main page', () => {
     });
     waitFor(() => {
       expect(Storage.prototype.getItem('textQuery')).toEqual('test');
+    });
+  });
+
+  test('expects click next button  to next page', async () => {
+    const nextUrl = CharacterAnswer.info.next;
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>,
+    );
+    const next = screen.getByTestId('next');
+    const currentUrl = window.location.href;
+    userEvent.click(next);
+    waitFor(() => {
+      expect(currentUrl).toEqual(nextUrl);
     });
   });
 });

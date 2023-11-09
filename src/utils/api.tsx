@@ -5,6 +5,7 @@ export async function getCharacters(currentPage: string) {
   try {
     const res: Response = await fetch(currentPage);
     const data: ApiResponse = await res.json();
+    console.log(data);
     return data;
   } catch {
     return null;

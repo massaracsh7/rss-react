@@ -148,3 +148,13 @@ export const CharacterAnswer = {
     },
   ],
 };
+
+export const CharacterAnswerEmpty = {
+  info: {
+    count: 0,
+    pages: 1,
+    next: null,
+    prev: null,
+  },
+  results: [],
+};

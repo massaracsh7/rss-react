@@ -3,13 +3,13 @@ import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import App from '../App';
+import { Search } from '../components/Search';
 
 describe('Search components', () => {
   test('search input event', () => {
     render(
       <MemoryRouter>
-        <App />
+        <Search search='' setSearch={jest.fn()} handleSubmit={jest.fn()} />
       </MemoryRouter>,
     );
     const searchInput = screen.getByTestId('search');

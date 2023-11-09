@@ -10,11 +10,11 @@ interface Props {
 export default function Pagination({ prevPage, nextPage, putNextPage, putPrevPage, num }: Props) {
   return (
     <div className='pages'>
-      <button onClick={putPrevPage} disabled={!prevPage}>
+      <button onClick={putPrevPage} disabled={!prevPage} data-testid='prev'>
         Prev
       </button>
       <span className='pages__num'>{num}</span>
-      <button onClick={putNextPage} disabled={!nextPage}>
+      <button onClick={putNextPage} disabled={!nextPage} data-testid='next'>
         Next
       </button>
     </div>
