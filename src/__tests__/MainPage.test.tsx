@@ -15,10 +15,12 @@ describe('Main page', () => {
       </MemoryRouter>,
     );
     const mainPage = await screen.findByTitle('main page');
-    expect(mainPage).toBeVisible();
+    waitFor(() => {
+      expect(mainPage).toBeVisible();
+    });
   });
 
-  test('expects something to be set in localStorage', () => {
+  test('expects something to be set in localStorage', async () => {
     jest.spyOn(Storage.prototype, 'setItem');
     Storage.prototype.setItem = jest.fn();
     render(
@@ -35,7 +37,7 @@ describe('Main page', () => {
     });
   });
 
-  test('expects something to be get from localStorage', () => {
+  test('expects something to be get from localStorage', async () => {
     jest.spyOn(Storage.prototype, 'setItem');
     Storage.prototype.setItem = jest.fn();
     jest.spyOn(Storage.prototype, 'getItem');
