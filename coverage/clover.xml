@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699542163183" clover="3.2.0">
-  <project timestamp="1699542163184" name="All files">
-    <metrics statements="210" coveredstatements="151" conditionals="21" coveredconditionals="10" methods="50" coveredmethods="34" elements="281" coveredelements="195" complexity="0" loc="210" ncloc="210" packages="18" files="29" classes="29"/>
+<coverage generated="1699554728259" clover="3.2.0">
+  <project timestamp="1699554728260" name="All files">
+    <metrics statements="213" coveredstatements="153" conditionals="23" coveredconditionals="11" methods="50" coveredmethods="34" elements="286" coveredelements="198" complexity="0" loc="213" ncloc="213" packages="18" files="30" classes="30"/>
     <package name="src">
       <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="App.tsx" path="F:\rs-school\react3\rss-react\src\App.tsx">
@@ -26,16 +26,16 @@
         <line num="1" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
-        <line num="6" count="14" type="stmt"/>
-        <line num="8" count="14" type="stmt"/>
+        <line num="6" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
-        <line num="12" count="14" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="14" count="6" type="stmt"/>
-        <line num="15" count="6" type="cond" truecount="0" falsecount="1"/>
+        <line num="12" count="16" type="stmt"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="14" count="7" type="stmt"/>
+        <line num="15" count="7" type="cond" truecount="0" falsecount="1"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="19" count="6" type="stmt"/>
-        <line num="22" count="14" type="stmt"/>
+        <line num="19" count="7" type="stmt"/>
+        <line num="22" count="16" type="stmt"/>
       </file>
       <file name="ButtonReload.tsx" path="F:\rs-school\react3\rss-react\src\components\Buttons\ButtonReload.tsx">
         <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
@@ -46,7 +46,7 @@
       <file name="index.ts" path="F:\rs-school\react3\rss-react\src\components\Buttons\index.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="4" type="stmt"/>
-        <line num="2" count="17" type="stmt"/>
+        <line num="2" count="19" type="stmt"/>
       </file>
     </package>
     <package name="src.components.CardsItem">
@@ -64,22 +64,22 @@
       </file>
     </package>
     <package name="src.components.CardsList">
-      <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="2"/>
+      <metrics statements="10" coveredstatements="9" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
       <file name="CardsList.tsx" path="F:\rs-school\react3\rss-react\src\components\CardsList\CardsList.tsx">
-        <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="9" coveredstatements="8" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="1"/>
         <line num="1" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
         <line num="10" count="3" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="13" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="14" count="6" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
+        <line num="11" count="9" type="stmt"/>
+        <line num="13" count="9" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="9" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
       </file>
       <file name="index.ts" path="F:\rs-school\react3\rss-react\src\components\CardsList\index.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="9" type="stmt"/>
+        <line num="1" count="12" type="stmt"/>
       </file>
     </package>
     <package name="src.components.DetailInfo">
@@ -102,24 +102,24 @@
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
-        <line num="5" count="14" type="stmt"/>
+        <line num="5" count="16" type="stmt"/>
       </file>
       <file name="index.ts" path="F:\rs-school\react3\rss-react\src\components\Header\index.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="19" type="stmt"/>
+        <line num="1" count="21" type="stmt"/>
       </file>
     </package>
     <package name="src.components.Loader">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="Loader.tsx" path="F:\rs-school\react3\rss-react\src\components\Loader\Loader.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="5" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="7" type="stmt"/>
       </file>
       <file name="index.ts" path="F:\rs-school\react3\rss-react\src\components\Loader\index.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="7" type="stmt"/>
+        <line num="1" count="10" type="stmt"/>
       </file>
     </package>
     <package name="src.components.Pagination">
@@ -128,25 +128,25 @@
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="3" type="stmt"/>
         <line num="10" count="3" type="stmt"/>
-        <line num="11" count="14" type="stmt"/>
+        <line num="11" count="16" type="stmt"/>
       </file>
       <file name="index.ts" path="F:\rs-school\react3\rss-react\src\components\Pagination\index.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="19" type="stmt"/>
+        <line num="1" count="21" type="stmt"/>
       </file>
     </package>
     <package name="src.components.PerPage">
       <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
       <file name="PerPage.tsx" path="F:\rs-school\react3\rss-react\src\components\PerPage\PerPage.tsx">
         <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="8" count="13" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="18" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
       </file>
       <file name="index.ts" path="F:\rs-school\react3\rss-react\src\components\PerPage\index.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="17" type="stmt"/>
+        <line num="1" count="23" type="stmt"/>
       </file>
     </package>
     <package name="src.components.Search">
@@ -155,13 +155,13 @@
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="3" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
-        <line num="9" count="14" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
         <line num="10" count="3" type="stmt"/>
-        <line num="12" count="14" type="stmt"/>
+        <line num="12" count="16" type="stmt"/>
       </file>
       <file name="index.ts" path="F:\rs-school\react3\rss-react\src\components\Search\index.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="19" type="stmt"/>
+        <line num="1" count="21" type="stmt"/>
       </file>
     </package>
     <package name="src.constants">
@@ -178,7 +178,7 @@
         <line num="1" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
         <line num="12" count="3" type="stmt"/>
-        <line num="14" count="3" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
         <line num="17" count="3" type="stmt"/>
       </file>
       <file name="SearchContext.tsx" path="F:\rs-school\react3\rss-react\src\contexts\SearchContext.tsx">
@@ -191,7 +191,12 @@
       </file>
     </package>
     <package name="src.mocks">
-      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="CharacterListMock.tsx" path="F:\rs-school\react3\rss-react\src\mocks\CharacterListMock.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="152" count="2" type="stmt"/>
+      </file>
       <file name="CharacterMock.tsx" path="F:\rs-school\react3\rss-react\src\mocks\CharacterMock.tsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="2" type="stmt"/>
@@ -252,58 +257,58 @@
         <line num="15" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
-        <line num="19" count="16" type="stmt"/>
-        <line num="20" count="15" type="stmt"/>
-        <line num="21" count="15" type="stmt"/>
-        <line num="22" count="15" type="stmt"/>
-        <line num="23" count="15" type="stmt"/>
-        <line num="24" count="15" type="stmt"/>
-        <line num="25" count="15" type="stmt"/>
-        <line num="26" count="15" type="stmt"/>
-        <line num="27" count="15" type="stmt"/>
-        <line num="31" count="15" type="stmt"/>
-        <line num="32" count="15" type="cond" truecount="2" falsecount="0"/>
-        <line num="33" count="15" type="stmt"/>
-        <line num="35" count="15" type="stmt"/>
-        <line num="36" count="7" type="stmt"/>
-        <line num="37" count="7" type="stmt"/>
-        <line num="38" count="7" type="stmt"/>
-        <line num="39" count="7" type="stmt"/>
-        <line num="40" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="19" count="18" type="stmt"/>
+        <line num="20" count="17" type="stmt"/>
+        <line num="21" count="17" type="stmt"/>
+        <line num="22" count="17" type="stmt"/>
+        <line num="23" count="17" type="stmt"/>
+        <line num="24" count="17" type="stmt"/>
+        <line num="25" count="17" type="stmt"/>
+        <line num="26" count="17" type="stmt"/>
+        <line num="27" count="17" type="stmt"/>
+        <line num="31" count="17" type="stmt"/>
+        <line num="32" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="17" type="stmt"/>
+        <line num="35" count="17" type="stmt"/>
+        <line num="36" count="8" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="40" count="8" type="cond" truecount="1" falsecount="1"/>
         <line num="41" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
-        <line num="47" count="7" type="stmt"/>
-        <line num="48" count="7" type="stmt"/>
-        <line num="49" count="7" type="stmt"/>
+        <line num="47" count="8" type="stmt"/>
+        <line num="48" count="8" type="stmt"/>
+        <line num="49" count="8" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
-        <line num="55" count="7" type="stmt"/>
-        <line num="58" count="15" type="stmt"/>
-        <line num="59" count="7" type="stmt"/>
-        <line num="62" count="15" type="stmt"/>
+        <line num="55" count="8" type="stmt"/>
+        <line num="58" count="17" type="stmt"/>
+        <line num="59" count="8" type="stmt"/>
+        <line num="62" count="17" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
         <line num="64" count="0" type="stmt"/>
-        <line num="67" count="15" type="stmt"/>
+        <line num="67" count="17" type="stmt"/>
         <line num="68" count="2" type="stmt"/>
         <line num="69" count="2" type="stmt"/>
         <line num="70" count="2" type="stmt"/>
-        <line num="73" count="15" type="stmt"/>
+        <line num="73" count="17" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
         <line num="76" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="81" count="15" type="stmt"/>
+        <line num="81" count="17" type="stmt"/>
         <line num="82" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="83" count="0" type="stmt"/>
-        <line num="87" count="15" type="stmt"/>
+        <line num="87" count="17" type="stmt"/>
         <line num="88" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="89" count="0" type="stmt"/>
-        <line num="93" count="15" type="stmt"/>
-        <line num="94" count="11" type="cond" truecount="1" falsecount="0"/>
-        <line num="95" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="93" count="17" type="stmt"/>
+        <line num="94" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="95" count="7" type="cond" truecount="1" falsecount="0"/>
         <line num="96" count="1" type="stmt"/>
-        <line num="101" count="5" type="stmt"/>
-        <line num="104" count="15" type="stmt"/>
+        <line num="101" count="6" type="stmt"/>
+        <line num="104" count="17" type="stmt"/>
       </file>
     </package>
     <package name="src.pages.Page404">
@@ -322,35 +327,36 @@
       </file>
     </package>
     <package name="src.utils">
-      <metrics statements="26" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
+      <metrics statements="27" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
       <file name="api.tsx" path="F:\rs-school\react3\rss-react\src\utils\api.tsx">
-        <metrics statements="26" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
+        <metrics statements="27" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
-        <line num="5" count="7" type="stmt"/>
-        <line num="6" count="7" type="stmt"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
-        <line num="10" count="7" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
       </file>
     </package>
   </project>
