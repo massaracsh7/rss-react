@@ -66,8 +66,8 @@ export default function MainPage() {
 
   const handleSearchInput = (searchText: string) => {
     setSearch(searchText);
-    localStorage.setItem('textQuery', search);
-    searchContext.setSearchData(search);
+    localStorage.setItem('textQuery', searchText);
+    searchContext.setSearchData(searchText);
   };
 
   const handleCountItems = useCallback(
@@ -102,7 +102,7 @@ export default function MainPage() {
   }, [countItems, loading, textError]);
 
   return (
-    <div className='main-page'>
+    <div className='main-page' title='main page'>
       <Header />
       <Search handleSubmit={handleSubmit} search={search} setSearch={handleSearchInput} />
       <div className='main__flex'>

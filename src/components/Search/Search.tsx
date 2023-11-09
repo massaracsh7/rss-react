@@ -18,8 +18,11 @@ export default function SearchInput({ setSearch, search, handleSubmit }: PropsSe
           type='search'
           value={search}
           onChange={handleChange}
+          data-testid='search'
         />
-        <button type='submit'>🔍</button>
+        <button type='submit' data-testid='submit'>
+          🔍
+        </button>
       </form>
     </>
   );

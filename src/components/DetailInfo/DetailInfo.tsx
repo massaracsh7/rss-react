@@ -9,9 +9,10 @@ interface Props {
 export default function DetailInfo({ character }: Props) {
   return (
     <div className='detail__info'>
-      <Link className='detail__close' to={`/`}>
+      <Link className='detail__close' to={`/`} data-testid='close'>
         X
       </Link>
+      <h3 className='detail__name'>Details Info</h3>
       <h4 className='detail__name'>{character.name}</h4>
       <div>
         <img className='detail__img' src={character.image} />

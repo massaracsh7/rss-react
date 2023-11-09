@@ -1,4 +1,6 @@
-export const CharacterMock = {
+import { Character } from '../types/types';
+
+export const CharacterMock: Character = {
   id: 1,
   name: 'Rick Sanchez',
   status: 'Alive',
