@@ -20,6 +20,17 @@ describe('Main page', () => {
     });
   });
 
+  it('should display loading state', async () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>,
+    );
+    waitFor(() => {
+      expect(getByText('Loading ...')).toBeInTheDocument();
+    });
+  });
+
   test('expects something to be set in localStorage', async () => {
     jest.spyOn(Storage.prototype, 'setItem');
     Storage.prototype.setItem = jest.fn();

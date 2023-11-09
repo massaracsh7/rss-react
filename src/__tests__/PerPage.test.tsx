@@ -19,6 +19,22 @@ describe('PerPage', () => {
       expect(screen.getByRole('form')).toHaveFormValues({ value: '20' });
     });
   });
+  test('should change options count 15', () => {
+    render(<PerPage setCountItems={jest.fn()} />);
+    const choose = screen.getByText('15');
+    userEvent.click(choose);
+    waitFor(() => {
+      expect(screen.getByRole('form')).toHaveFormValues({ value: '15' });
+    });
+  });
+  test('should change options count 10', () => {
+    render(<PerPage setCountItems={jest.fn()} />);
+    const choose = screen.getByText('10');
+    userEvent.click(choose);
+    waitFor(() => {
+      expect(screen.getByRole('form')).toHaveFormValues({ value: '10' });
+    });
+  });
   test('should change options count 5', () => {
     render(<PerPage setCountItems={jest.fn()} />);
     const choose = screen.getByText('5');

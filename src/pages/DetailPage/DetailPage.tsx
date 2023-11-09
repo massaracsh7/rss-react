@@ -42,7 +42,7 @@ export default function DetailPage() {
 
   return (
     <>
-      <div className='cards__bg' onClick={goBack}></div>
+      <div className='cards__bg' onClick={goBack} title='detail page'></div>
       <div className='cards__detail'>{viewDetails}</div>
     </>
   );
