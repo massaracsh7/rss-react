@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 
+import { CharacterMock } from '../mocks/CharacterMock';
 import DetailPage from '../pages/DetailPage/DetailPage';
 
 describe('Detail page', () => {
@@ -26,6 +27,25 @@ describe('Detail page', () => {
     );
     waitFor(() => {
       expect(getByText('Loading ...')).toBeInTheDocument();
+    });
+  });
+
+  test('the component renders card with detail info', async () => {
+    const mockGetContext = jest.fn().mockImplementation(() => {
+      CharacterMock;
+    });
+
+    jest.mock('../utils/api', () => ({
+      getCharacter: mockGetContext,
+    }));
+    render(
+      <MemoryRouter>
+        <DetailPage />
+      </MemoryRouter>,
+    );
+
+    waitFor(() => {
+      expect(screen.getByText('Details Info Rick Sanchez')).toBeInTheDocument();
     });
   });
 });

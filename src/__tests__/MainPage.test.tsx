@@ -20,7 +20,7 @@ describe('Main page', () => {
     });
   });
 
-  it('should display loading state', async () => {
+  test('should display loading state', async () => {
     const { getByText } = render(
       <MemoryRouter>
         <MainPage />
