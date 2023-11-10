@@ -8,6 +8,21 @@ import { CharacterAnswer } from '../mocks/CharacterListMock';
 import MainPage from '../pages/MainPage/MainPage';
 
 describe('Main page', () => {
+  beforeEach(() => {
+    const mockGetContext = jest.fn().mockImplementation(() => {
+      CharacterAnswer;
+    });
+    jest.mock('../utils/api', () => ({
+      ItemsContext: mockGetContext,
+    }));
+    const mockGetSearch = jest.fn().mockImplementation(() => {
+      ('');
+    });
+    jest.mock('../utils/api', () => ({
+      SearchContext: mockGetSearch,
+    }));
+  });
+
   test('renders MainPage', async () => {
     render(
       <MemoryRouter>
