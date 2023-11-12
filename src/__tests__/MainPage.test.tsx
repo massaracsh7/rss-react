@@ -9,27 +9,6 @@ import { CharacterAnswer, CharacterAnswerEmpty } from '../mocks/CharacterListMoc
 import MainPage from '../pages/MainPage/MainPage';
 
 describe('Main page', () => {
-  beforeEach(() => {
-    const mockGetContext = jest.fn().mockImplementation(() => {
-      CharacterAnswer;
-    });
-    jest.mock('../contexts/ItemsContext', () => ({
-      ItemsContext: mockGetContext,
-    }));
-    const mockGetSearch = jest.fn().mockImplementation(() => {
-      ('');
-    });
-    jest.mock('../contexts/SearchContext', () => ({
-      SearchContext: mockGetSearch,
-    }));
-    const mockGetCharacters = jest.fn().mockImplementation(() => {
-      CharacterAnswer;
-    });
-    jest.mock('../utils/api', () => ({
-      getCharacters: mockGetCharacters,
-    }));
-  });
-
   test('renders MainPage', async () => {
     render(
       <MemoryRouter>
