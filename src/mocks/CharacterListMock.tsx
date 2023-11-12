@@ -58,32 +58,7 @@ export const CharacterAnswer = {
       url: 'https://rickandmortyapi.com/api/character/2',
       created: '2017-11-04T18:50:21.651Z',
     },
-    {
-      id: 5,
-      name: 'Jerry Smith',
-      status: 'Dead', // just for the sake of testing, sorry Jerry
-      species: 'Human',
-      type: '',
-      gender: 'Male',
-      origin: {
-        name: 'Earth (Replacement Dimension)',
-        url: 'https://rickandmortyapi.com/api/location/20',
-      },
-      location: {
-        name: 'Earth (Replacement Dimension)',
-        url: 'https://rickandmortyapi.com/api/location/20',
-      },
-      image: 'https://rickandmortyapi.com/api/character/avatar/5.jpeg',
-      episode: [
-        'https://rickandmortyapi.com/api/episode/6',
-        'https://rickandmortyapi.com/api/episode/7',
-        'https://rickandmortyapi.com/api/episode/8',
-        'https://rickandmortyapi.com/api/episode/9',
-        'https://rickandmortyapi.com/api/episode/10',
-      ],
-      url: 'https://rickandmortyapi.com/api/character/5',
-      created: '2017-11-04T19:26:56.301Z',
-    },
+
     {
       id: 3,
       name: 'Summer Smith',
@@ -145,6 +120,32 @@ export const CharacterAnswer = {
       ],
       url: 'https://rickandmortyapi.com/api/character/4',
       created: '2017-11-04T19:22:43.665Z',
+    },
+    {
+      id: 5,
+      name: 'Jerry Smith',
+      status: 'Dead', // just for the sake of testing, sorry Jerry
+      species: 'Human',
+      type: '',
+      gender: 'Male',
+      origin: {
+        name: 'Earth (Replacement Dimension)',
+        url: 'https://rickandmortyapi.com/api/location/20',
+      },
+      location: {
+        name: 'Earth (Replacement Dimension)',
+        url: 'https://rickandmortyapi.com/api/location/20',
+      },
+      image: 'https://rickandmortyapi.com/api/character/avatar/5.jpeg',
+      episode: [
+        'https://rickandmortyapi.com/api/episode/6',
+        'https://rickandmortyapi.com/api/episode/7',
+        'https://rickandmortyapi.com/api/episode/8',
+        'https://rickandmortyapi.com/api/episode/9',
+        'https://rickandmortyapi.com/api/episode/10',
+      ],
+      url: 'https://rickandmortyapi.com/api/character/5',
+      created: '2017-11-04T19:26:56.301Z',
     },
   ],
 };

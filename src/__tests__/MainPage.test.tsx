@@ -4,7 +4,8 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { CharacterAnswer } from '../mocks/CharacterListMock';
+import { API_URL } from '../constants/constants';
+import { CharacterAnswer, CharacterAnswerEmpty } from '../mocks/CharacterListMock';
 import MainPage from '../pages/MainPage/MainPage';
 
 describe('Main page', () => {
@@ -12,14 +13,20 @@ describe('Main page', () => {
     const mockGetContext = jest.fn().mockImplementation(() => {
       CharacterAnswer;
     });
-    jest.mock('../utils/api', () => ({
+    jest.mock('../contexts/ItemsContext', () => ({
       ItemsContext: mockGetContext,
     }));
     const mockGetSearch = jest.fn().mockImplementation(() => {
       ('');
     });
-    jest.mock('../utils/api', () => ({
+    jest.mock('../contexts/SearchContext', () => ({
       SearchContext: mockGetSearch,
+    }));
+    const mockGetCharacters = jest.fn().mockImplementation(() => {
+      CharacterAnswer;
+    });
+    jest.mock('../utils/api', () => ({
+      getCharacters: mockGetCharacters,
     }));
   });
 
@@ -46,6 +53,23 @@ describe('Main page', () => {
     });
   });
 
+  test('should display error message', async () => {
+    jest.mock('../utils/api', () => ({
+      getCharacter: mockGetContext,
+    }));
+    const mockGetContext = jest.fn().mockImplementation(() => {
+      CharacterAnswerEmpty;
+    });
+    const { getByText } = render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>,
+    );
+    waitFor(() => {
+      expect(getByText('Sorry, Your character is not found. Please')).toBeInTheDocument();
+    });
+  });
+
   test('expects something to be set in localStorage', async () => {
     jest.spyOn(Storage.prototype, 'setItem');
     Storage.prototype.setItem = jest.fn();
@@ -55,9 +79,11 @@ describe('Main page', () => {
       </MemoryRouter>,
     );
     const searchInput = screen.getByTestId('search');
+    const submit = screen.getByTestId('submit');
     fireEvent.input(searchInput, {
       target: { value: 'test' },
     });
+    userEvent.click(submit);
     waitFor(() => {
       expect(Storage.prototype.setItem).toHaveBeenCalledWith('textQuery', 'test');
     });
@@ -74,9 +100,11 @@ describe('Main page', () => {
       </MemoryRouter>,
     );
     const searchInput = screen.getByTestId('search');
+    const submit = screen.getByTestId('submit');
     fireEvent.input(searchInput, {
       target: { value: 'test' },
     });
+    userEvent.click(submit);
     waitFor(() => {
       expect(Storage.prototype.getItem('textQuery')).toEqual('test');
     });
@@ -91,9 +119,44 @@ describe('Main page', () => {
     );
     const next = screen.getByTestId('next');
     const currentUrl = window.location.href;
+    expect(screen.getByTestId<HTMLButtonElement>('prev').disabled).toBeTruthy();
     userEvent.click(next);
     waitFor(() => {
       expect(currentUrl).toEqual(nextUrl);
+    });
+  });
+
+  test('expects click prev button  to prev page', async () => {
+    const firstUrl = `${API_URL}?page = 1`;
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>,
+    );
+    const next = screen.getByTestId('next');
+    const prev = screen.getByTestId('prev');
+    const currentUrl = window.location.href;
+    userEvent.click(next);
+    userEvent.click(prev);
+    waitFor(() => {
+      expect(currentUrl).toEqual(firstUrl);
+      expect(screen.getByTestId<HTMLButtonElement>('prev').disabled).toBeTruthy();
+    });
+  });
+
+  test('if catch errors the component does not renders card ', async () => {
+    jest.mock('../utils/api', () => ({
+      getCharacter: [],
+    }));
+    console.error = jest.fn();
+    render(
+      <MemoryRouter>
+        <MainPage />
+      </MemoryRouter>,
+    );
+
+    waitFor(() => {
+      expect(console.error).toHaveBeenCalled();
     });
   });
 });

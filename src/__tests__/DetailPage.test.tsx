@@ -48,4 +48,40 @@ describe('Detail page', () => {
       expect(screen.getByText('Details Info Rick Sanchez')).toBeInTheDocument();
     });
   });
+
+  test('the component renders card with detail info', async () => {
+    const mockGetContext = jest.fn().mockImplementation(() => {
+      CharacterMock;
+    });
+
+    jest.mock('../utils/api', () => ({
+      getCharacter: mockGetContext,
+    }));
+    const { getByText } = render(
+      <MemoryRouter>
+        <DetailPage />
+      </MemoryRouter>,
+    );
+
+    waitFor(() => {
+      expect(getByText('Details Info Rick Sanchez')).toBeInTheDocument();
+      expect(getByText('Loading ...')).toBeFalsy();
+    });
+  });
+
+  test('if catch errors the component does not renders card ', async () => {
+    jest.mock('../utils/api', () => ({
+      getCharacter: [],
+    }));
+    console.error = jest.fn();
+    render(
+      <MemoryRouter>
+        <DetailPage />
+      </MemoryRouter>,
+    );
+
+    waitFor(() => {
+      expect(console.error).toHaveBeenCalled();
+    });
+  });
 });

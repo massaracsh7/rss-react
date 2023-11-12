@@ -4,14 +4,30 @@ import userEvent from '@testing-library/user-event';
 
 import ButtonError from '../components/Buttons/ButtonError';
 
-describe('ButtonReload component', () => {
-  test('Should render Button Reload', () => {
+describe('ButtonError component', () => {
+  test('Should render Button Error', () => {
     render(<ButtonError />);
     const errorBtn = screen.getByText('Create Error');
     expect(errorBtn).toBeInTheDocument();
   });
 
-  test('Should reload after Button Reload click', () => {
+  test('Should not Error text reload before Button Reload click', () => {
+    render(<ButtonError />);
+    waitFor(() => {
+      expect(screen.getByText('Something went wrong.')).toBe(false);
+    });
+  });
+
+  test('Should Error text reload after Button Reload click', () => {
+    render(<ButtonError />);
+    const errorBtn = screen.getByText('Create Error');
+    userEvent.click(errorBtn);
+    waitFor(() => {
+      expect(new Error('Error was created')).toHaveBeenCalled();
+    });
+  });
+
+  test('Should Error text reload after Button Reload click', () => {
     render(<ButtonError />);
     const errorBtn = screen.getByText('Create Error');
     userEvent.click(errorBtn);

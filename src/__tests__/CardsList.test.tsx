@@ -7,17 +7,12 @@ import { CardsList } from '../components/CardsList';
 import { CharacterAnswer, CharacterAnswerEmpty } from '../mocks/CharacterListMock';
 
 describe('CardList', () => {
-  beforeEach(() => {
-    jest.mock('../components/CardsItem');
-    const mockGetContext = jest.fn().mockImplementation(() => {
-      CharacterAnswer.results;
-    });
-
-    jest.mock('../contexts/ItemsContext', () => ({
-      ItemsContext: mockGetContext,
-    }));
-  });
   it('renders properties correctly', async () => {
+    jest.mock('../contexts/ItemsContext', () => ({
+      ItemsContext: jest.fn().mockImplementation(() => {
+        CharacterAnswer.results;
+      }),
+    }));
     render(
       <MemoryRouter>
         <CardsList countItems={'20'} />
@@ -28,15 +23,36 @@ describe('CardList', () => {
     expect(charList).toBeVisible();
   });
 
-  test('the component renders the specified number of cards', async () => {
-    const nums = '5';
-
+  test('an appropriate message should be displayed if no cards are present', async () => {
+    const nums = '0';
+    jest.mock('../contexts/ItemsContext', () => ({
+      ItemsContext: jest.fn().mockImplementation(() => {
+        CharacterAnswer.results;
+      }),
+    }));
     render(
       <MemoryRouter>
         <CardsList countItems={nums} />
       </MemoryRouter>,
     );
+    waitFor(() => {
+      const error = screen.findByText('Sorry, Your character is not found');
+      expect(error).toBeVisible();
+    });
+  });
 
+  test('the component renders the specified number of cards', async () => {
+    jest.mock('../contexts/ItemsContext', () => ({
+      ItemsContext: jest.fn().mockImplementation(() => {
+        CharacterAnswer.results;
+      }),
+    }));
+    const nums = '5';
+    render(
+      <MemoryRouter>
+        <CardsList countItems={nums} />
+      </MemoryRouter>,
+    );
     const charList = await screen.findByTitle('character list');
     waitFor(() => {
       expect(charList.childElementCount).toBe(+nums);
@@ -44,8 +60,64 @@ describe('CardList', () => {
   });
 
   test('the component renders the specified number of cards', async () => {
+    jest.mock('../contexts/ItemsContext', () => ({
+      ItemsContext: jest.fn().mockImplementation(() => {
+        CharacterAnswer.results;
+      }),
+    }));
     const nums = '5';
+    render(
+      <MemoryRouter>
+        <CardsList countItems={nums} />
+      </MemoryRouter>,
+    );
+    waitFor(() => {
+      const charCards = screen.getAllByTestId('detail-card');
+      expect(charCards.length).toBe(+nums);
+    });
+  });
 
+  test('the component renders with mocks values', async () => {
+    jest.mock('../contexts/ItemsContext', () => ({
+      ItemsContext: jest.fn().mockImplementation(() => {
+        CharacterAnswer.results;
+      }),
+    }));
+    const nums = '5';
+    render(
+      <MemoryRouter>
+        <CardsList countItems={nums} />
+      </MemoryRouter>,
+    );
+    const charNames = CharacterAnswer.results.slice(0, +nums).map((item) => item.name);
+    waitFor(() => {
+      const charList = screen.findByTitle('character list');
+      expect(charList).toHaveTextContent(charNames[0]);
+      expect(charList).toHaveTextContent(charNames[+nums - 1]);
+    });
+  });
+
+  test('an appropriate message should be displayed if no cards are present', async () => {
+    const nums = '5';
+    jest.mock('../contexts/ItemsContext', () => ({
+      ItemsContext: mockGetContext,
+    }));
+    const mockGetContext = jest.fn().mockImplementation(() => {
+      CharacterAnswerEmpty;
+    });
+    render(
+      <MemoryRouter>
+        <CardsList countItems={nums} />
+      </MemoryRouter>,
+    );
+    waitFor(() => {
+      const error = screen.findByText('Sorry, Your character is not found');
+      expect(error).toBeVisible();
+    });
+  });
+
+  test('cards items array should be empty, if items context is empty', async () => {
+    const nums = '5';
     jest.mock('../contexts/ItemsContext', () => ({
       ItemsContext: mockGetContext,
     }));
@@ -57,10 +129,9 @@ describe('CardList', () => {
         <CardsList countItems={nums} />
       </MemoryRouter>,
     );
-
     waitFor(() => {
-      const error = screen.findByText('Sorry, Your character is not found');
-      expect(error).toBeVisible();
+      const charCards = screen.getAllByRole('li');
+      expect(charCards.length).toBe(0);
     });
   });
 });

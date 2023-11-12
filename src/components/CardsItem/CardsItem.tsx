@@ -9,7 +9,7 @@ interface Props {
 
 export default function CardsItem({ character }: Props) {
   return (
-    <li className='cards__item' data-testid='detail-card'>
+    <li className='cards__item' data-testid={`detail-${character.id}`}>
       <Link to={`details=/${character.id}`} data-testid='detail-link'>
         <div className='cards__info'>
           <h4 className='cards__name'>{character.name}</h4>
