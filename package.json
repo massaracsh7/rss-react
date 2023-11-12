@@ -14,7 +14,7 @@
     "prepare": "husky install",
     "format:fix": "prettier --write \"src/**/*.{ts,tsx,scss}\"",
     "lint-staged": "lint-staged",
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
