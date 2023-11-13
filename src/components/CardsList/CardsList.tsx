@@ -9,12 +9,12 @@ interface Props {
 }
 export default function CardsList({ countItems }: Props) {
   const itemsContext = useContext(ItemsContext);
-  const message = `Sorry, Your character is not found.`;
+  const characts = itemsContext.itemsData !== false ? itemsContext.itemsData : [];
   return (
     <ul className='cards__list' title='character list'>
-      {itemsContext.itemsData === false
-        ? message
-        : itemsContext.itemsData
+      {characts.length === 0
+        ? `Sorry, Your character is not found.`
+        : characts
             .slice(0, +countItems)
             .map((item) => <CardsItem character={item} key={item.id} />)}
     </ul>
