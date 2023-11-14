@@ -1,13 +1,19 @@
+import { useState } from 'react';
+
+import { fetchName } from '../../store/Slice';
+import { useAppDispatch } from '../../types/types';
 import './style.css';
 
-interface PropsSearch {
-  setSearch: (searchStr: string) => void;
-  search: string;
-  handleSubmit: () => void;
-}
-export default function SearchInput({ setSearch, search, handleSubmit }: PropsSearch) {
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setSearch((e.target as HTMLInputElement).value.toLowerCase().trim());
+export default function SearchInput() {
+  const dispatch = useAppDispatch();
+  const [search, setSearch] = useState('');
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(fetchName({ name: search }));
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
   return (
     <>

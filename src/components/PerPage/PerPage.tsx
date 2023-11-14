@@ -1,14 +1,16 @@
+import { setCountItems } from '../../store/Slice';
+import { useAppDispatch } from '../../types/types';
 import './style.css';
 
-interface Props {
-  setCountItems: (num: string) => void;
-}
-
-export default function PerPage({ setCountItems }: Props) {
+export default function PerPage() {
+  const dispatch = useAppDispatch();
+  const handleCountItems = (num: string) => {
+    dispatch(setCountItems(num));
+  };
   return (
     <select
       className='count'
-      onChange={(event) => setCountItems(event.target.value)}
+      onChange={(event) => handleCountItems(event.target.value)}
       data-testid='per-page'
     >
       <option value='20'>20</option>

@@ -1,3 +1,7 @@
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+
+import store from '../store';
+
 export type PageNumber = string | null;
 export type Gender = 'unknown' | 'Female' | 'Male' | 'Genderless';
 export type Status = 'Dead' | 'Alive' | 'unknown';
@@ -29,15 +33,13 @@ export interface Character {
   created: string;
 }
 
-export type CharacterArray = Array<Character> | false;
-
 export interface ApiResponse {
   info: Info;
-  results: CharacterArray;
+  results: Character[];
 }
 
 export interface StateMainPage {
-  characters: CharacterArray;
+  characters: Character[];
   search: string;
   loading: boolean;
   textError: string;
@@ -63,3 +65,8 @@ export const defaultCharacter: Character = {
   url: '',
   created: '',
 };
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppDispatch: () => AppDispatch = useDispatch;
