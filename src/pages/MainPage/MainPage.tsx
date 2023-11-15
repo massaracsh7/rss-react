@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { CardsList } from '../../components/CardsList';
@@ -7,17 +7,11 @@ import { Loader } from '../../components/Loader';
 import { Pagination } from '../../components/Pagination';
 import { PerPage } from '../../components/PerPage';
 import { Search } from '../../components/Search';
-import { fetchGetCharacters } from '../../store/Slice';
-import { useAppDispatch, useAppSelector } from '../../types/types';
+import { userApi } from '../../utils/UserService';
 import './style.css';
 
 export default function MainPage() {
-  const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.store);
-
-  useEffect(() => {
-    dispatch(fetchGetCharacters());
-  }, [dispatch]);
+  const { isLoading } = userApi.useGetCharactersQuery('');
 
   const viewPage = useMemo(() => {
     if (isLoading) return <Loader />;

@@ -1,16 +1,19 @@
 import { useState } from 'react';
 
-import { fetchName } from '../../store/Slice';
+import { setSearchData } from '../../store/Slice';
 import { useAppDispatch } from '../../types/types';
+import { userApi } from '../../utils/UserService';
 import './style.css';
 
 export default function SearchInput() {
   const dispatch = useAppDispatch();
+
   const [search, setSearch] = useState('');
+  userApi.useGetCharacterByNameQuery(search);
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(fetchName({ name: search }));
+    dispatch(setSearchData(search));
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);

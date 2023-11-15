@@ -3,8 +3,7 @@ import { useAppSelector } from '../../types/types';
 import './style.css';
 
 export default function CardsList() {
-  const { cards, countItems } = useAppSelector((state) => state.store);
-
+  const { countItems, cards } = useAppSelector((state) => state.storeReducer);
   return (
     <ul className='cards__list' title='character list'>
       {cards.slice(0, countItems).map((item) => (
