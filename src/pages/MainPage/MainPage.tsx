@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { ButtonReload } from '../../components/Buttons';
@@ -8,13 +8,19 @@ import { Loader } from '../../components/Loader';
 import { Pagination } from '../../components/Pagination';
 import { PerPage } from '../../components/PerPage';
 import { Search } from '../../components/Search';
+import { setLoading } from '../../store/Slice';
 import { useFetchCharacters } from '../../store/characterApi';
-import { useAppSelector } from '../../types/types';
+import { useAppDispatch, useAppSelector } from '../../types/types';
 import './style.css';
 
 export default function MainPage() {
+  const dispatch = useAppDispatch();
   const { baseName, textError } = useAppSelector((state) => state.storeReducer);
   const { isLoading, error } = useFetchCharacters(baseName);
+
+  useEffect(() => {
+    dispatch(setLoading(isLoading));
+  }, [dispatch, isLoading]);
 
   const viewPage = useMemo(() => {
     if (isLoading) return <Loader />;

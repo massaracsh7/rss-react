@@ -6,6 +6,7 @@ import { Character, PageNumber } from '../types/types';
 import { characterApi } from './characterApi';
 
 const initialState = {
+  loading: false,
   cards: [] as Character[],
   pagination: {
     AllPages: 1,
@@ -41,6 +42,9 @@ export const Slice = createSlice({
     setBaseName(state, action) {
       state.baseName = action.payload;
     },
+    setLoading(state, action) {
+      state.loading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -56,5 +60,5 @@ export const Slice = createSlice({
 });
 
 export default Slice.reducer;
-export const { setCountItems, setSearchData, setCurrentPage, setCards, setBaseName } =
+export const { setCountItems, setSearchData, setCurrentPage, setCards, setBaseName, setLoading } =
   Slice.actions;

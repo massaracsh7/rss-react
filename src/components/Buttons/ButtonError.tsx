@@ -11,9 +11,9 @@ export default function ButtonReload() {
 
   useEffect(() => {
     const updateError = () => {
-      console.log(isError);
       if (isError) {
         throw new Error('Error was created');
+        console.log(isError);
       }
     };
     updateError();

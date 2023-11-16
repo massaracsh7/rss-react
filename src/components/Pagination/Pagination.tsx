@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { API_URL } from '../../constants/constants';
 import { setCards, setCurrentPage } from '../../store/Slice';
 import { useFetchCharacters } from '../../store/characterApi';
 import { useAppDispatch, useAppSelector } from '../../types/types';
 import './style.css';
 
 export default function Pagination() {
-  const { pagination, baseName } = useAppSelector((state) => state.storeReducer);
+  const { pagination, baseName, countItems } = useAppSelector((state) => state.storeReducer);
   const [page, setPage] = useState(baseName);
   const { data } = useFetchCharacters(page);
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ export default function Pagination() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setSearchParams(page.replace('https://rickandmortyapi.com/api/character', ''));
+    setSearchParams(page.replace(`${API_URL}`, ''));
   }, [searchParams, setSearchParams, dispatch, page]);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function Pagination() {
 
   useEffect(() => {
     setPage(baseName);
-  }, [baseName]);
+  }, [baseName, countItems]);
 
   const putPrevPage = () => {
     setPage(data?.info.prev ?? baseName);

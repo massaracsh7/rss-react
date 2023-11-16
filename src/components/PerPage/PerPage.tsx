@@ -1,12 +1,24 @@
-import { setCountItems } from '../../store/Slice';
-import { useAppDispatch } from '../../types/types';
+import { API_URL } from '../../constants/constants';
+import { setBaseName, setCountItems, setCurrentPage } from '../../store/Slice';
+import { useFetchCharacters } from '../../store/characterApi';
+import { useAppDispatch, useAppSelector } from '../../types/types';
 import './style.css';
 
 export default function PerPage() {
   const dispatch = useAppDispatch();
   const handleCountItems = (num: string) => {
     dispatch(setCountItems(num));
+    dispatch(
+      setBaseName(
+        localStorage.getItem('textQuery')
+          ? `${API_URL}/?name=${localStorage.getItem('textQuery')}`
+          : API_URL,
+      ),
+    );
+    dispatch(setCurrentPage(1));
   };
+  const { baseName } = useAppSelector((state) => state.storeReducer);
+  useFetchCharacters(baseName);
   return (
     <select
       className='count'
