@@ -1,14 +1,17 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/dist/query/react';
 
-import { userApi } from '../utils/UserService';
 import storeReducer from './Slice';
+import { characterApi } from './characterApi';
 
 const rootReducer = combineReducers({
   storeReducer,
-  [userApi.reducerPath]: userApi.reducer,
+  [characterApi.reducerPath]: characterApi.reducer,
 });
 
-export default configureStore({
+export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(characterApi.middleware),
 });
+
+setupListeners(store.dispatch);

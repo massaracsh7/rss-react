@@ -1,6 +1,6 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import store from '../store';
+import { store } from '../store/index';
 
 export type PageNumber = string | null;
 export type Gender = 'unknown' | 'Female' | 'Male' | 'Genderless';

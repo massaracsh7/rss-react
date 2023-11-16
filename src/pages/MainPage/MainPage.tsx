@@ -7,11 +7,14 @@ import { Loader } from '../../components/Loader';
 import { Pagination } from '../../components/Pagination';
 import { PerPage } from '../../components/PerPage';
 import { Search } from '../../components/Search';
-import { userApi } from '../../utils/UserService';
+import { useFetchCharacters } from '../../store/characterApi';
+import { useAppSelector } from '../../types/types';
 import './style.css';
 
 export default function MainPage() {
-  const { isLoading } = userApi.useGetCharactersQuery('');
+  const { baseName } = useAppSelector((state) => state.storeReducer);
+  console.log(baseName);
+  const { isLoading } = useFetchCharacters(baseName);
 
   const viewPage = useMemo(() => {
     if (isLoading) return <Loader />;

@@ -1,33 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { API_URL } from '../../constants/constants';
-import { setCurrentPage } from '../../store/Slice';
-import { Character, PageNumber, useAppDispatch, useAppSelector } from '../../types/types';
-import { userApi } from '../../utils/UserService';
+import { setCards, setCurrentPage } from '../../store/Slice';
+import { useFetchCharacters } from '../../store/characterApi';
+import { useAppDispatch, useAppSelector } from '../../types/types';
 import './style.css';
 
 export default function Pagination() {
-  const [page, setPage] = useState(`${API_URL}`);
-  const { pagination } = useAppSelector(
-    (state: {
-      storeReducer: {
-        isLoading: boolean;
-        cards: Character[];
-        pagination: { AllPages: number; pages: number; next: PageNumber; prev: PageNumber };
-        searchData: string;
-        countItems: number;
-      };
-    }) => state.storeReducer,
-  );
-  const { data } = userApi.useGetCharactersQuery(page);
+  const { pagination, baseName } = useAppSelector((state) => state.storeReducer);
+  const [page, setPage] = useState(baseName);
+  const { data } = useFetchCharacters(page);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(setCards(data?.results));
+  }, [data?.results, dispatch]);
+
+  useEffect(() => {
+    setPage(baseName);
+  }, [baseName]);
+
   const putPrevPage = () => {
-    setPage(data?.info.prev ?? `${API_URL}`);
+    setPage(data?.info.prev ?? baseName);
     dispatch(setCurrentPage(pagination.pages - 1));
   };
   const putNextPage = () => {
-    setPage(data?.info.next ?? `${API_URL}`);
+    setPage(data?.info.next ?? baseName);
     dispatch(setCurrentPage(pagination.pages + 1));
   };
   return (
