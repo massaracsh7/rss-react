@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { API_URL } from '../constants/constants';
+import { BASE_URL } from '../constants/constants';
 import { Character, PageNumber } from '../types/types';
 import { characterApi } from './characterApi';
 
@@ -16,9 +16,7 @@ const initialState = {
   },
   searchData: (localStorage.getItem('textQuery') as string) ?? '',
   countItems: 20,
-  baseName: localStorage.getItem('textQuery')
-    ? `${API_URL}/?name=${localStorage.getItem('textQuery')}`
-    : API_URL,
+  baseName: BASE_URL,
   textError: 'Sorry, Your character is not found. Please, ',
 };
 
