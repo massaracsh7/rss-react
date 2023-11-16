@@ -1,9 +1,23 @@
+import { useEffect, useState } from 'react';
+
 import './style.css';
 
-export default function ButtonError() {
+export default function ButtonReload() {
+  const [isError, setError] = useState(false);
+
   const createError = () => {
-    throw new Error('Error was created');
+    setError(true);
   };
+
+  useEffect(() => {
+    const updateError = () => {
+      console.log(isError);
+      if (isError) {
+        throw new Error('Error was created');
+      }
+    };
+    updateError();
+  }, [isError]);
 
   return (
     <>

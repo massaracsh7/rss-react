@@ -12,12 +12,13 @@ export default function DetailPage() {
   const detailId = params.id ?? 0;
   const navigation = useNavigate();
 
-  const { isLoading, data } = useFetchById(+detailId);
+  const { isLoading, error, data } = useFetchById(+detailId);
 
   const viewDetails = useMemo(() => {
     if (isLoading) return <Loader />;
+    if (error) return 'Sorry, error reload data';
     return <DetailInfo character={data ?? defaultCharacter} />;
-  }, [data, isLoading]);
+  }, [data, error, isLoading]);
 
   const goBack = () => {
     navigation('/', { replace: true });

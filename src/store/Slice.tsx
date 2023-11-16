@@ -19,6 +19,7 @@ const initialState = {
   baseName: localStorage.getItem('textQuery')
     ? `${API_URL}/?name=${localStorage.getItem('textQuery')}`
     : API_URL,
+  textError: 'Sorry, Your character is not found. Please, ',
 };
 
 export const Slice = createSlice({

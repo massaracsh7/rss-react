@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import { ButtonReload } from '../../components/Buttons';
 import { CardsList } from '../../components/CardsList';
 import { Header } from '../../components/Header';
 import { Loader } from '../../components/Loader';
@@ -12,14 +13,19 @@ import { useAppSelector } from '../../types/types';
 import './style.css';
 
 export default function MainPage() {
-  const { baseName } = useAppSelector((state) => state.storeReducer);
-  console.log(baseName);
-  const { isLoading } = useFetchCharacters(baseName);
+  const { baseName, textError } = useAppSelector((state) => state.storeReducer);
+  const { isLoading, error } = useFetchCharacters(baseName);
 
   const viewPage = useMemo(() => {
     if (isLoading) return <Loader />;
+    if (error)
+      return (
+        <div>
+          {textError} <ButtonReload />
+        </div>
+      );
     return <CardsList />;
-  }, [isLoading]);
+  }, [error, isLoading, textError]);
 
   return (
     <div className='main-page' title='main page'>
