@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { setCards, setCurrentPage } from '../../store/Slice';
 import { useFetchCharacters } from '../../store/characterApi';
@@ -10,6 +11,12 @@ export default function Pagination() {
   const [page, setPage] = useState(baseName);
   const { data } = useFetchCharacters(page);
   const dispatch = useAppDispatch();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setSearchParams(page.replace('https://rickandmortyapi.com/api/character', ''));
+  }, [searchParams, setSearchParams, dispatch, page]);
 
   useEffect(() => {
     dispatch(setCards(data?.results));

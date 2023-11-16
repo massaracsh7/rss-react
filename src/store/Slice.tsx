@@ -6,7 +6,6 @@ import { Character, PageNumber } from '../types/types';
 import { characterApi } from './characterApi';
 
 const initialState = {
-  isLoading: false,
   cards: [] as Character[],
   pagination: {
     AllPages: 1,
