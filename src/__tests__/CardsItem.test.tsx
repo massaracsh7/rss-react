@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 import { CardsItem } from '../components/CardsItem';
 import { CharacterMock } from '../mocks/CharacterMock';
-import { getCharacter } from '../utils/api';
+import { useFetchById } from '../store/characterApi';
 
 describe('ProductCard', () => {
   test('renders properties correctly', () => {
@@ -35,8 +35,8 @@ describe('ProductCard', () => {
   });
 
   test('clicking triggers an additional API call to fetch detailed information', async () => {
-    jest.mock('../utils/api', () => ({
-      getCharacter: jest.fn(),
+    jest.mock('../store/characterApi', () => ({
+      useFetchById: jest.fn(),
     }));
     render(
       <MemoryRouter>
@@ -46,7 +46,7 @@ describe('ProductCard', () => {
     const open = screen.getByTestId('detail-link');
     userEvent.click(open);
     waitFor(() => {
-      expect(getCharacter).toHaveBeenCalled();
+      expect(useFetchById).toHaveBeenCalled();
     });
   });
 });

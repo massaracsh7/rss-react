@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
 import '@testing-library/jest-dom';
@@ -5,13 +6,17 @@ import { render, screen, waitFor } from '@testing-library/react';
 
 import { CharacterMock } from '../mocks/CharacterMock';
 import DetailPage from '../pages/DetailPage/DetailPage';
+import { store } from '../store/index';
 
 describe('Detail page', () => {
   test('renders DetailPage', async () => {
     render(
-      <MemoryRouter>
-        <DetailPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <DetailPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     const detailPage = await screen.findByTitle('detail page');
     waitFor(() => {
@@ -21,9 +26,12 @@ describe('Detail page', () => {
 
   it('should display loading state', async () => {
     const { getByText } = render(
-      <MemoryRouter>
-        <DetailPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <DetailPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     waitFor(() => {
       expect(getByText('Loading ...')).toBeInTheDocument();
@@ -35,13 +43,16 @@ describe('Detail page', () => {
       CharacterMock;
     });
 
-    jest.mock('../utils/api', () => ({
-      getCharacter: mockGetContext,
+    jest.mock('../store/characterApi', () => ({
+      useFetchById: mockGetContext,
     }));
     render(
-      <MemoryRouter>
-        <DetailPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <DetailPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
 
     waitFor(() => {
@@ -54,13 +65,24 @@ describe('Detail page', () => {
       CharacterMock;
     });
 
-    jest.mock('../utils/api', () => ({
-      getCharacter: mockGetContext,
+    jest.mock('../store/characterApi', () => ({
+      useFetchById: mockGetContext,
     }));
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <DetailPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
+    );
     const { getByText } = render(
-      <MemoryRouter>
-        <DetailPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <DetailPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
 
     waitFor(() => {
@@ -70,14 +92,17 @@ describe('Detail page', () => {
   });
 
   test('if catch errors the component does not renders card ', async () => {
-    jest.mock('../utils/api', () => ({
-      getCharacter: [],
+    jest.mock('../store/characterApi', () => ({
+      useFetchById: [],
     }));
     console.error = jest.fn();
     render(
-      <MemoryRouter>
-        <DetailPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <DetailPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
 
     waitFor(() => {

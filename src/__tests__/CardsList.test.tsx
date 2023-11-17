@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
 import '@testing-library/jest-dom';
@@ -5,18 +6,25 @@ import { render, screen, waitFor } from '@testing-library/react';
 
 import { CardsList } from '../components/CardsList';
 import { CharacterAnswer, CharacterAnswerEmpty } from '../mocks/CharacterListMock';
+import { store } from '../store/index';
 
 describe('CardList', () => {
   it('renders properties correctly', async () => {
-    jest.mock('../contexts/ItemsContext', () => ({
-      ItemsContext: jest.fn().mockImplementation(() => {
+    jest.mock('../types/types', () => ({
+      cards: jest.fn().mockImplementation(() => {
         CharacterAnswer.results;
+      }),
+      countItems: jest.fn().mockImplementation(() => {
+        5;
       }),
     }));
     render(
-      <MemoryRouter>
-        <CardsList countItems={'20'} />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardsList />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
 
     const charList = await screen.findByTitle('character list');
@@ -24,16 +32,20 @@ describe('CardList', () => {
   });
 
   test('an appropriate message should be displayed if no cards are present', async () => {
-    const nums = '0';
-    jest.mock('../contexts/ItemsContext', () => ({
-      ItemsContext: jest.fn().mockImplementation(() => {
+    jest.mock('../types/types', () => ({
+      cards: jest.fn().mockImplementation(() => {
         CharacterAnswer.results;
+      }),
+      countItems: jest.fn().mockImplementation(() => {
+        0;
       }),
     }));
     render(
-      <MemoryRouter>
-        <CardsList countItems={nums} />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardsList />
+        </MemoryRouter>
+      </Provider>,
     );
     waitFor(() => {
       const error = screen.findByText('Sorry, Your character is not found');
@@ -42,73 +54,88 @@ describe('CardList', () => {
   });
 
   test('the component renders the specified number of cards', async () => {
-    jest.mock('../contexts/ItemsContext', () => ({
-      ItemsContext: jest.fn().mockImplementation(() => {
+    jest.mock('../types/types', () => ({
+      cards: jest.fn().mockImplementation(() => {
         CharacterAnswer.results;
       }),
+      countItems: jest.fn().mockImplementation(() => {
+        5;
+      }),
     }));
-    const nums = '5';
     render(
-      <MemoryRouter>
-        <CardsList countItems={nums} />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardsList />
+        </MemoryRouter>
+      </Provider>,
     );
     const charList = await screen.findByTitle('character list');
     waitFor(() => {
-      expect(charList.childElementCount).toBe(+nums);
+      expect(charList.childElementCount).toBe(5);
     });
   });
 
   test('the component renders the specified number of cards', async () => {
-    jest.mock('../contexts/ItemsContext', () => ({
-      ItemsContext: jest.fn().mockImplementation(() => {
+    jest.mock('../types/types', () => ({
+      cards: jest.fn().mockImplementation(() => {
         CharacterAnswer.results;
       }),
+      countItems: jest.fn().mockImplementation(() => {
+        5;
+      }),
     }));
-    const nums = '5';
     render(
-      <MemoryRouter>
-        <CardsList countItems={nums} />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardsList />
+        </MemoryRouter>
+      </Provider>,
     );
     waitFor(() => {
       const charCards = screen.getAllByTestId('detail-card');
-      expect(charCards.length).toBe(+nums);
+      expect(charCards.length).toBe(5);
     });
   });
 
   test('the component renders with mocks values', async () => {
-    jest.mock('../contexts/ItemsContext', () => ({
-      ItemsContext: jest.fn().mockImplementation(() => {
+    jest.mock('../types/types', () => ({
+      cards: jest.fn().mockImplementation(() => {
         CharacterAnswer.results;
       }),
+      countItems: jest.fn().mockImplementation(() => {
+        5;
+      }),
     }));
-    const nums = '5';
     render(
-      <MemoryRouter>
-        <CardsList countItems={nums} />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardsList />
+        </MemoryRouter>
+      </Provider>,
     );
-    const charNames = CharacterAnswer.results.slice(0, +nums).map((item) => item.name);
+    const charNames = CharacterAnswer.results.slice(0, 5).map((item) => item.name);
     waitFor(() => {
       const charList = screen.findByTitle('character list');
       expect(charList).toHaveTextContent(charNames[0]);
-      expect(charList).toHaveTextContent(charNames[+nums - 1]);
+      expect(charList).toHaveTextContent(charNames[4]);
     });
   });
 
   test('an appropriate message should be displayed if no cards are present', async () => {
-    const nums = '5';
-    jest.mock('../contexts/ItemsContext', () => ({
-      ItemsContext: mockGetContext,
+    jest.mock('../types/types', () => ({
+      cards: jest.fn().mockImplementation(() => {
+        CharacterAnswerEmpty;
+      }),
+      countItems: jest.fn().mockImplementation(() => {
+        5;
+      }),
     }));
-    const mockGetContext = jest.fn().mockImplementation(() => {
-      CharacterAnswerEmpty;
-    });
     render(
-      <MemoryRouter>
-        <CardsList countItems={nums} />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardsList />
+        </MemoryRouter>
+      </Provider>,
     );
     waitFor(() => {
       const error = screen.findByText('Sorry, Your character is not found');
@@ -117,17 +144,20 @@ describe('CardList', () => {
   });
 
   test('cards items array should be empty, if items context is empty', async () => {
-    const nums = '5';
-    jest.mock('../contexts/ItemsContext', () => ({
-      ItemsContext: mockGetContext,
+    jest.mock('../types/types', () => ({
+      cards: jest.fn().mockImplementation(() => {
+        CharacterAnswerEmpty;
+      }),
+      countItems: jest.fn().mockImplementation(() => {
+        5;
+      }),
     }));
-    const mockGetContext = jest.fn().mockImplementation(() => {
-      CharacterAnswerEmpty.results;
-    });
     render(
-      <MemoryRouter>
-        <CardsList countItems={nums} />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardsList />
+        </MemoryRouter>
+      </Provider>,
     );
     waitFor(() => {
       const charCards = screen.getAllByRole('li');

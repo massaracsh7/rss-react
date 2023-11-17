@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
 import '@testing-library/jest-dom';
@@ -7,13 +8,17 @@ import userEvent from '@testing-library/user-event';
 import { API_URL } from '../constants/constants';
 import { CharacterAnswer, CharacterAnswerEmpty } from '../mocks/CharacterListMock';
 import MainPage from '../pages/MainPage/MainPage';
+import { store } from '../store/index';
 
 describe('Main page', () => {
   test('renders MainPage', async () => {
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     const mainPage = await screen.findByTitle('main page');
     waitFor(() => {
@@ -23,9 +28,12 @@ describe('Main page', () => {
 
   test('should display loading state', async () => {
     const { getByText } = render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     waitFor(() => {
       expect(getByText('Loading ...')).toBeInTheDocument();
@@ -33,16 +41,19 @@ describe('Main page', () => {
   });
 
   test('should display error message', async () => {
-    jest.mock('../utils/api', () => ({
-      getCharacter: mockGetContext,
+    jest.mock('../store/characterApi', () => ({
+      useFetchById: mockGetContext,
     }));
     const mockGetContext = jest.fn().mockImplementation(() => {
       CharacterAnswerEmpty;
     });
     const { getByText } = render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     waitFor(() => {
       expect(getByText('Sorry, Your character is not found. Please')).toBeInTheDocument();
@@ -53,9 +64,12 @@ describe('Main page', () => {
     jest.spyOn(Storage.prototype, 'setItem');
     Storage.prototype.setItem = jest.fn();
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     const searchInput = screen.getByTestId('search');
     const submit = screen.getByTestId('submit');
@@ -74,9 +88,12 @@ describe('Main page', () => {
     jest.spyOn(Storage.prototype, 'getItem');
     Storage.prototype.getItem = jest.fn();
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     const searchInput = screen.getByTestId('search');
     const submit = screen.getByTestId('submit');
@@ -92,9 +109,12 @@ describe('Main page', () => {
   test('expects click next button  to next page', async () => {
     const nextUrl = CharacterAnswer.info.next;
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     const next = screen.getByTestId('next');
     const currentUrl = window.location.href;
@@ -108,9 +128,12 @@ describe('Main page', () => {
   test('expects click prev button  to prev page', async () => {
     const firstUrl = `${API_URL}?page = 1`;
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     const next = screen.getByTestId('next');
     const prev = screen.getByTestId('prev');
@@ -124,14 +147,20 @@ describe('Main page', () => {
   });
 
   test('if catch errors the component does not renders card ', async () => {
-    jest.mock('../utils/api', () => ({
-      getCharacter: [],
+    jest.mock('../store/characterApi', () => ({
+      useFetchCharacters: mockGetContext,
     }));
+    const mockGetContext = jest.fn().mockImplementation(() => {
+      CharacterAnswerEmpty;
+    });
     console.error = jest.fn();
     render(
-      <MemoryRouter>
-        <MainPage />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <MainPage />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
 
     waitFor(() => {

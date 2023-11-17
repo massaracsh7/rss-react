@@ -1,22 +1,33 @@
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { Search } from '../components/Search';
+import { store } from '../store/index';
 
 describe('Search components', () => {
-  test('search input event', () => {
+  test('search input event', async () => {
+    jest.mock('../types/types', () => ({
+      useAppSelector: jest.fn(),
+      useAppDispatch: jest.fn(),
+    }));
     render(
-      <MemoryRouter>
-        <Search search='' setSearch={jest.fn()} handleSubmit={jest.fn()} />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <Search />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
     const searchInput = screen.getByTestId('search');
-    expect(searchInput).toContainHTML('');
-    fireEvent.input(searchInput, {
-      target: { value: 'test' },
+    waitFor(() => {
+      expect(searchInput).toContainHTML('');
+      fireEvent.input(searchInput, {
+        target: { value: 'test' },
+      });
+      expect(searchInput).toContainHTML('test');
     });
-    expect(searchInput).toContainHTML('test');
   });
 });

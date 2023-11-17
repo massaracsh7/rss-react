@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
@@ -10,9 +10,9 @@ import { CharacterMock } from '../mocks/CharacterMock';
 describe('DetailCard', () => {
   it('renders properties correctly', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <DetailInfo character={CharacterMock} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
@@ -20,9 +20,9 @@ describe('DetailCard', () => {
 
   it('DetailPage is closed correctly', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <DetailInfo character={CharacterMock} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
     expect(screen.getByText('Details Info')).toBeInTheDocument();
     const close = screen.getByTestId('close');
