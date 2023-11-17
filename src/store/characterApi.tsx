@@ -5,6 +5,7 @@ import { ApiResponse, Character } from '../types/types';
 
 export const characterApi = createApi({
   reducerPath: 'characterApi',
+  keepUnusedDataFor: process.env.NODE_ENV === 'test' ? 0 : 60,
   baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}` }),
   endpoints: (builder) => ({
     fetchCharacters: builder.query<ApiResponse, string>({
