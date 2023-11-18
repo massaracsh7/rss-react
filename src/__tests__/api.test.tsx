@@ -9,7 +9,6 @@ import MainPage from '../pages/MainPage/MainPage';
 describe('Api response', function () {
   test('should display API answer ', async () => {
     const { getByText, queryByText } = renderWithProviders(<MainPage />);
-
     expect(queryByText(/loading.../i)).toBeInTheDocument();
     waitFor(() => {
       expect(getByText('Rick Sanchez')).toBeInTheDocument();

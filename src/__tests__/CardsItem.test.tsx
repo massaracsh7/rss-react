@@ -1,30 +1,20 @@
-import { MemoryRouter } from 'react-router-dom';
-
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { CardsItem } from '../components/CardsItem';
 import { CharacterMock } from '../mocks/CharacterMock';
+import { renderWithProviders } from '../mocks/testUtils';
 import { useFetchById } from '../store/characterApi';
 
 describe('ProductCard', () => {
   test('renders properties correctly', () => {
-    render(
-      <MemoryRouter>
-        <CardsItem character={CharacterMock} />
-      </MemoryRouter>,
-    );
-
+    renderWithProviders(<CardsItem character={CharacterMock} />);
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
   });
 
   test('renders properties correctly', () => {
-    render(
-      <MemoryRouter>
-        <CardsItem character={CharacterMock} />
-      </MemoryRouter>,
-    );
+    renderWithProviders(<CardsItem character={CharacterMock} />);
     const open = screen.getByTestId('detail-link');
     userEvent.click(open);
     waitFor(() => {
@@ -35,14 +25,7 @@ describe('ProductCard', () => {
   });
 
   test('clicking triggers an additional API call to fetch detailed information', async () => {
-    jest.mock('../store/characterApi', () => ({
-      useFetchById: jest.fn(),
-    }));
-    render(
-      <MemoryRouter>
-        <CardsItem character={CharacterMock} />
-      </MemoryRouter>,
-    );
+    renderWithProviders(<CardsItem character={CharacterMock} />);
     const open = screen.getByTestId('detail-link');
     userEvent.click(open);
     waitFor(() => {

@@ -1,25 +1,17 @@
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
-
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { rest } from 'msw';
 
 import { API_URL } from '../constants/constants';
+import { server } from '../jestSetup';
 import { CharacterAnswer, CharacterAnswerEmpty } from '../mocks/CharacterListMock';
+import { renderWithProviders } from '../mocks/testUtils';
 import MainPage from '../pages/MainPage/MainPage';
-import { store } from '../store/index';
 
 describe('Main page', () => {
   test('renders MainPage', async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-        ,
-      </Provider>,
-    );
+    renderWithProviders(<MainPage />);
     const mainPage = await screen.findByTitle('main page');
     waitFor(() => {
       expect(mainPage).toBeVisible();
@@ -27,34 +19,19 @@ describe('Main page', () => {
   });
 
   test('should display loading state', async () => {
-    const { getByText } = render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-        ,
-      </Provider>,
-    );
+    const { getByText } = renderWithProviders(<MainPage />);
     waitFor(() => {
       expect(getByText('Loading ...')).toBeInTheDocument();
     });
   });
 
   test('should display error message', async () => {
-    jest.mock('../store/characterApi', () => ({
-      useFetchById: mockGetContext,
-    }));
-    const mockGetContext = jest.fn().mockImplementation(() => {
-      CharacterAnswerEmpty;
-    });
-    const { getByText } = render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-        ,
-      </Provider>,
+    server.use(
+      rest.get('https://rickandmortyapi.com/api/character/*', (_req, res, ctx) => {
+        return res(ctx.json(CharacterAnswerEmpty));
+      }),
     );
+    const { getByText } = renderWithProviders(<MainPage />);
     waitFor(() => {
       expect(getByText('Sorry, Your character is not found. Please')).toBeInTheDocument();
     });
@@ -63,14 +40,7 @@ describe('Main page', () => {
   test('expects something to be set in localStorage', async () => {
     jest.spyOn(Storage.prototype, 'setItem');
     Storage.prototype.setItem = jest.fn();
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-        ,
-      </Provider>,
-    );
+    renderWithProviders(<MainPage />);
     const searchInput = screen.getByTestId('search');
     const submit = screen.getByTestId('submit');
     fireEvent.input(searchInput, {
@@ -87,14 +57,7 @@ describe('Main page', () => {
     Storage.prototype.setItem = jest.fn();
     jest.spyOn(Storage.prototype, 'getItem');
     Storage.prototype.getItem = jest.fn();
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-        ,
-      </Provider>,
-    );
+    renderWithProviders(<MainPage />);
     const searchInput = screen.getByTestId('search');
     const submit = screen.getByTestId('submit');
     fireEvent.input(searchInput, {
@@ -108,14 +71,7 @@ describe('Main page', () => {
 
   test('expects click next button  to next page', async () => {
     const nextUrl = CharacterAnswer.info.next;
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-        ,
-      </Provider>,
-    );
+    renderWithProviders(<MainPage />);
     const next = screen.getByTestId('next');
     const currentUrl = window.location.href;
     expect(screen.getByTestId<HTMLButtonElement>('prev').disabled).toBeTruthy();
@@ -127,14 +83,7 @@ describe('Main page', () => {
 
   test('expects click prev button  to prev page', async () => {
     const firstUrl = `${API_URL}?page = 1`;
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-        ,
-      </Provider>,
-    );
+    renderWithProviders(<MainPage />);
     const next = screen.getByTestId('next');
     const prev = screen.getByTestId('prev');
     const currentUrl = window.location.href;
@@ -147,22 +96,13 @@ describe('Main page', () => {
   });
 
   test('if catch errors the component does not renders card ', async () => {
-    jest.mock('../store/characterApi', () => ({
-      useFetchCharacters: mockGetContext,
-    }));
-    const mockGetContext = jest.fn().mockImplementation(() => {
-      CharacterAnswerEmpty;
-    });
-    console.error = jest.fn();
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainPage />
-        </MemoryRouter>
-        ,
-      </Provider>,
+    server.use(
+      rest.get('https://rickandmortyapi.com/api/character/*', (_req, res, ctx) => {
+        return res(ctx.json(CharacterAnswerEmpty));
+      }),
     );
-
+    renderWithProviders(<MainPage />);
+    console.error = jest.fn();
     waitFor(() => {
       expect(console.error).toHaveBeenCalled();
     });

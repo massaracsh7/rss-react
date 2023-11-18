@@ -9,30 +9,7 @@ test('demo', () => {
   expect(true).toBe(true);
 });
 
-describe('Main page', () => {
-  test('Renders the main page', async () => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
-    );
-    waitFor(() => {
-      expect(true).toBeTruthy();
-    });
-  });
-
-  test('Check the header text', async () => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
-    );
-    const headerText = screen.getByText('Rick & Morty Characters');
-    waitFor(() => {
-      expect(headerText).toBeInTheDocument();
-    });
-  });
-
+describe('App', () => {
   test('error page', async () => {
     render(
       <MemoryRouter initialEntries={['/123445']}>

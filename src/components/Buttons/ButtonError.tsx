@@ -14,6 +14,8 @@ export default function ButtonReload() {
       if (isError) {
         throw new Error('Error was created');
         console.log(isError);
+      } else {
+        return;
       }
     };
     updateError();
