@@ -27,7 +27,13 @@ export function renderWithProviders(
         [characterApi.reducerPath]: characterApi.reducer,
       },
       preloadedState,
-      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(characterApi.middleware),
+      middleware: (getDefaultMiddleware) =>
+        [
+          ...getDefaultMiddleware({
+            immutableCheck: false,
+            serializableCheck: false,
+          }),
+        ].concat(characterApi.middleware),
     }),
     ...renderOptions
   }: ExtendedRenderOptions = {},

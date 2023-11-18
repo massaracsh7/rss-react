@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700259098552" clover="3.2.0">
-  <project timestamp="1700259098553" name="All files">
+<coverage generated="1700301251195" clover="3.2.0">
+  <project timestamp="1700301251196" name="All files">
     <metrics statements="218" coveredstatements="199" conditionals="25" coveredconditionals="15" methods="64" coveredmethods="54" elements="307" coveredelements="268" complexity="0" loc="218" ncloc="218" packages="17" files="31" classes="31"/>
     <package name="src">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -31,9 +31,9 @@
         <line num="14" count="16" type="cond" truecount="1" falsecount="1"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="19" count="16" type="stmt"/>
-        <line num="22" count="16" type="stmt"/>
-        <line num="25" count="30" type="stmt"/>
+        <line num="18" count="16" type="stmt"/>
+        <line num="21" count="16" type="stmt"/>
+        <line num="24" count="30" type="stmt"/>
       </file>
       <file name="ButtonReload.tsx" path="F:\rs-school\react4\rss-react\src\components\Buttons\ButtonReload.tsx">
         <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
@@ -239,8 +239,8 @@
         <line num="12" count="8" type="stmt"/>
         <line num="20" count="8" type="stmt"/>
         <line num="30" count="32" type="stmt"/>
-        <line num="36" count="32" type="stmt"/>
-        <line num="43" count="32" type="stmt"/>
+        <line num="39" count="32" type="stmt"/>
+        <line num="46" count="32" type="stmt"/>
       </file>
     </package>
     <package name="src.pages.DetailPage">
@@ -351,7 +351,7 @@
         <line num="7" count="2" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
         <line num="14" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.types">
