@@ -1,0 +1,11 @@
+@media (max-width: 550px) {
+  .button-error {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .button-error {
+    font-size: 12px;
+  }
+}
