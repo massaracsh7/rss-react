@@ -1,7 +1,7 @@
 import { Component, ErrorInfo } from 'react';
 
 import { ButtonReload } from '../Buttons';
-import './style.css';
+import styles from './ErrorBoundary.module.css';
 
 interface ErrorProps {
   children: React.ReactNode;
@@ -29,8 +29,8 @@ export default class ErrorBoundary extends Component<ErrorProps, ErrorState> {
     if (this.state.hasError) {
       return (
         <>
-          <div className='error-page'>
-            <h1 className='error-page__title'>Something went wrong.</h1>
+          <div className={styles['error-page']}>
+            <h1 className={styles['error-page__title']}>Something went wrong.</h1>
             <ButtonReload />
           </div>
         </>

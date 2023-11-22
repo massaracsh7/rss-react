@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import './style.css';
+import styles from './ButtonError.module.css';
 
 export default function ButtonReload() {
   const [isError, setError] = useState(false);
@@ -23,7 +23,7 @@ export default function ButtonReload() {
 
   return (
     <>
-      <button className='button-error' onClick={createError}>
+      <button className={styles['button-error']} onClick={createError}>
         Create Error
       </button>
     </>

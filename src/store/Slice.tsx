@@ -14,7 +14,8 @@ const initialState = {
     next: '' as PageNumber,
     prev: '' as PageNumber,
   },
-  searchData: (localStorage.getItem('textQuery') as string) ?? '',
+  searchData:
+    (typeof window !== 'undefined' && (localStorage.getItem('textQuery') as string)) ?? '',
   countItems: 20,
   baseName: BASE_URL,
   textError: 'Sorry, Your character is not found. Please, ',
