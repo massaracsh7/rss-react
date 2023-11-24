@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query/react';
+import { createWrapper } from 'next-redux-wrapper';
 
 import storeReducer from './Slice';
 import { characterApi } from './characterApi';
@@ -18,4 +19,11 @@ export const store = configureStore({
     }).concat(characterApi.middleware),
 });
 
+export const makeStore = () =>
+  configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(characterApi.middleware),
+  });
+
 setupListeners(store.dispatch);
+export const wrapper = createWrapper(makeStore, { debug: true });

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import { Character } from '../../types/types';
 
@@ -9,7 +9,7 @@ interface Props {
 export default function DetailInfo({ character }: Props) {
   return (
     <div className='detail__info'>
-      <Link className='detail__close' to={`/`} data-testid='close'>
+      <Link className='detail__close' href={`/`} data-testid='close'>
         X
       </Link>
       <h3 className='detail__name'>Details Info</h3>

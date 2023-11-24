@@ -1,32 +1,29 @@
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import { API_URL } from '../../constants/constants';
-import { setBaseName, setCards, setCurrentPage, setSearchData } from '../../store/Slice';
-import { useFetchCharacters } from '../../store/characterApi';
-import { useAppDispatch, useAppSelector } from '../../types/types';
+import { useRouter } from 'next/router';
+
 import styles from './Search.module.css';
 
 export default function SearchInput() {
-  const dispatch = useAppDispatch();
-  const { searchData, baseName } = useAppSelector((state) => state.storeReducer);
-  const [search, setSearch] = useState(searchData);
-  const { data } = useFetchCharacters(baseName);
-
+  const [search, setSearch] = useState('');
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setSearchData(search));
+    handleSearch(search);
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  useEffect(() => {
-    dispatch(setCards(data?.results)), dispatch(setCurrentPage(1));
-  }, [data?.results, dispatch, search]);
-
-  useEffect(() => {
-    dispatch(setBaseName(search ? `${API_URL}/?name=${search}` : API_URL));
-  }, [dispatch, search]);
+  const router = useRouter();
+  const handleSearch = (search: string): void => {
+    router.push({
+      query: {
+        page: '1',
+        name: search,
+      },
+    });
+    console.log(router);
+  };
 
   return (
     <>
@@ -35,9 +32,9 @@ export default function SearchInput() {
           className={styles['search__input']}
           autoFocus
           type='search'
+          data-testid='search'
           value={search}
           onChange={handleChange}
-          data-testid='search'
         />
         <button type='submit' data-testid='submit'>
           🔍

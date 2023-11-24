@@ -10,7 +10,13 @@ interface Props {
 export default function CardsItem({ character }: Props) {
   return (
     <li className={styles['cards__item']} data-testid={`detail-${character.id}`}>
-      <Link href={`details=/${character.id}`} data-testid='detail-link'>
+      <Link
+        href={{
+          pathname: 'details/[id]',
+          query: { id: character.id },
+        }}
+        data-testid='detail-link'
+      >
         <div className={styles['cards__info']}>
           <h4 className={styles['cards__name']}>{character.name}</h4>
           <div>
