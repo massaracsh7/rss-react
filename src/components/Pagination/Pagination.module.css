@@ -1,3 +1,6 @@
+.pages {
+  display: inline-flex;
+}
 .pages__num {
   display: inline-block;
   font-size: 20px;

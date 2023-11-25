@@ -1,3 +1,4 @@
+import styles from '@/styles/Detail.module.css';
 import Link from 'next/link';
 
 import { Character } from '../../types/types';
@@ -8,14 +9,14 @@ interface Props {
 
 export default function DetailInfo({ character }: Props) {
   return (
-    <div className='detail__info'>
-      <Link className='detail__close' href={`/`} data-testid='close'>
+    <div className={styles['detail__info']}>
+      <Link className={styles['detail__close']} href={`/`} data-testid='close'>
         X
       </Link>
-      <h3 className='detail__name'>Details Info</h3>
-      <h4 className='detail__name'>{character.name}</h4>
+      <h3 className={styles['detail__name']}>Details Info</h3>
+      <h4 className={styles['detail__name']}>{character.name}</h4>
       <div>
-        <img className='detail__img' src={character.image} />
+        <img className={styles['detail__img']} src={character.image} />
       </div>
       <p>
         <b>Status:</b>

@@ -2,6 +2,7 @@ import { ReactElement, ReactNode, useMemo } from 'react';
 
 import DetailLayout from '@/components/Layout/DetailLayout';
 import { wrapper } from '@/store';
+import styles from '@/styles/Detail.module.css';
 import { useRouter } from 'next/router';
 
 import { DetailInfo } from '../../components/DetailInfo';
@@ -9,7 +10,6 @@ import { Loader } from '../../components/Loader';
 import { fetchCharacterById, getRunningQueriesThunk } from '../../store/characterApi';
 import { Character, defaultCharacter } from '../../types/types';
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   const { id } = context.query;
   const data = await store.dispatch(fetchCharacterById.initiate(id ? +id : 1));
@@ -41,8 +41,8 @@ export default function DetailPage(data: {
 
   return (
     <>
-      <div className='cards__bg' onClick={goBack} title='detail page'></div>
-      <div className='cards__detail'>{viewDetails}</div>
+      <div className={styles['cards__bg']} onClick={goBack} title='detail page'></div>
+      <div className={styles['cards__detail']}>{viewDetails}</div>
     </>
   );
 }

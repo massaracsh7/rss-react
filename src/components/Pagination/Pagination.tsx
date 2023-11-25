@@ -4,8 +4,8 @@ import styles from './Pagination.module.css';
 
 interface Props {
   currentPage: string;
-  nextPage: string | null | undefined;
-  prevPage: string | null | undefined;
+  nextPage: string | null;
+  prevPage: string | null;
 }
 
 export default function Pagination({ currentPage, prevPage, nextPage }: Props) {
@@ -30,7 +30,7 @@ export default function Pagination({ currentPage, prevPage, nextPage }: Props) {
       <button onClick={putPrevPage} disabled={!prevPage} data-testid='prev'>
         Prev
       </button>
-      <span className={styles['pages__num']}>{currentPage}</span>
+      <span className={styles['pages__num']}>{parseInt(currentPage)}</span>
       <button onClick={putNextPage} disabled={!nextPage} data-testid='next'>
         Next
       </button>

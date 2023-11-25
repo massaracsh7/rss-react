@@ -33,7 +33,6 @@ export default function SearchInput() {
           autoFocus
           type='search'
           data-testid='search'
-          value={search}
           onChange={handleChange}
         />
         <button type='submit' data-testid='submit'>

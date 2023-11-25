@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import Layout from '@/components/Layout/Layout';
+import '@/libs/normalize.css';
 import { store } from '@/store';
 import '@/styles/globals.css';
 import { NextPage } from 'next';

@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import styles from '@/styles/Home.module.css';
+
 import { PerPage } from '../../components/PerPage';
 import { Search } from '../../components/Search';
 import Header from '../Header/Header';
@@ -11,12 +13,14 @@ interface AppProps {
 const Layout: React.FC<AppProps> = ({ children }) => {
   return (
     <div className='container'>
-      <Header />
       <div className='main-page' title='main page'>
-        <Search />
-        <PerPage />
+        <Header />
+        <div className={styles['main__flex']}>
+          <Search />
+          <PerPage />
+        </div>
+        {children}
       </div>
-      {children}
     </div>
   );
 };

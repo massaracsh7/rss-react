@@ -11,7 +11,7 @@ const initialState = {
   pagination: {
     AllPages: 1,
     pages: 1,
-    next: '' as PageNumber,
+    next: 'https://rickandmortyapi.com/api/character/?page=2' as PageNumber,
     prev: '' as PageNumber,
   },
   searchData:

@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 
+import styles from '@/styles/Home.module.css';
 import { useAppSelector } from '@/types/types';
 
 import CardsList from '../CardsList/CardsList';
@@ -10,13 +11,18 @@ interface AppProps {
 }
 
 const DetailLayout: React.FC<AppProps> = ({ children }) => {
-  const { cards } = useAppSelector((state) => state.storeReducer);
+  const { cards, pagination } = useAppSelector((state) => state.storeReducer);
+  const current = String(pagination.pages);
   return (
-    <div>
-      <Pagination currentPage={'1'} prevPage={''} nextPage={''} />
-      <CardsList cards={cards} />
-      {children}
-    </div>
+    <>
+      <div className={styles['main__flex']}>
+        <Pagination currentPage={current} prevPage={pagination.prev} nextPage={pagination.next} />
+      </div>
+      <div className={styles['main__flex']}>
+        <CardsList cards={cards} />
+        {children}
+      </div>
+    </>
   );
 };
 
