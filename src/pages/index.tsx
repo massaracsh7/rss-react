@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { API_URL } from '@/constants/constants';
 import { wrapper } from '@/store';
 import styles from '@/styles/Home.module.css';
-import { ApiResponse } from '@/types/types';
+import { DataSSP } from '@/types/types';
 import { useRouter } from 'next/router';
 
 import { ButtonReload } from '../components/Buttons';
@@ -31,9 +31,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default function Home(data: {
-  response: { isLoading: boolean; isError: boolean; data: ApiResponse };
-}) {
+export default function Home(data: DataSSP) {
   const apiData = data.response;
   const router = useRouter();
   const curPage = router.query.page ? String(router.query.page) : '1';
@@ -59,5 +57,6 @@ export default function Home(data: {
       </>
     );
   }, [apiData.data, curPage, isError, isLoading]);
+
   return <>{viewPage}</>;
 }

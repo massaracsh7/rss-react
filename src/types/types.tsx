@@ -66,6 +66,22 @@ export const defaultCharacter: Character = {
   created: '',
 };
 
+export interface DataSSP {
+  response: {
+    isLoading: boolean;
+    isError: boolean;
+    data: ApiResponse;
+  };
+}
+
+export interface DetailSSP {
+  response: {
+    isLoading: boolean;
+    isError: boolean;
+    data: Character;
+  };
+}
+
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppStore = typeof store;

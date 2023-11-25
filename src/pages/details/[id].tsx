@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { DetailInfo } from '../../components/DetailInfo';
 import { Loader } from '../../components/Loader';
 import { fetchCharacterById, getRunningQueriesThunk } from '../../store/characterApi';
-import { Character, defaultCharacter } from '../../types/types';
+import { DetailSSP, defaultCharacter } from '../../types/types';
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   const { id } = context.query;
@@ -21,17 +21,15 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default function DetailPage(data: {
-  response: { isLoading: boolean; error: boolean; data: Character };
-}) {
+export default function DetailPage(data: DetailSSP) {
   const apiData = data.response;
-  const { isLoading, error } = data.response;
+  const { isLoading, isError } = data.response;
 
   const viewDetails = useMemo(() => {
     if (isLoading) return <Loader />;
-    if (error) return 'Sorry, error reload data';
+    if (isError) return 'Sorry, error reload data';
     return <DetailInfo character={apiData.data ?? defaultCharacter} />;
-  }, [apiData.data, error, isLoading]);
+  }, [apiData.data, isLoading, isError]);
 
   const router = useRouter();
 
