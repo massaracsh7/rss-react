@@ -1,0 +1,10 @@
+.main {
+  position: relative;
+}
+
+.main__flex {
+  display: flex;
+  gap: 100px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}

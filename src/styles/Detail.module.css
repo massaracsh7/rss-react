@@ -1,0 +1,31 @@
+.cards__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.cards__detail {
+  position: relative;
+  width: 50%;
+  border: 5px dotted orange;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.detail__img {
+  width: 100%;
+}
+
+.detail__close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 5px;
+}
+
+.detail__name {
+  font-size: 24px;
+}

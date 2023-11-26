@@ -1,0 +1,9 @@
+.pages {
+  display: inline-flex;
+}
+.pages__num {
+  display: inline-block;
+  font-size: 20px;
+  padding: 10px 20px;
+  font-weight: 600;
+}

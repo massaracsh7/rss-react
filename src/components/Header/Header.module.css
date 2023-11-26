@@ -1,0 +1,28 @@
+.header {
+  background-color: #ffa500;
+  padding: 20px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  border: 2px solid #ffa500;
+  box-shadow: 0 0 10px #f5d67b,
+    0 0 20px #f5d67b;
+}
+
+
+@media (max-width: 550px) {
+  .header__title{
+    font-size: 20px;
+  }
+  .button-error {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .button-error {
+    font-size: 12px;
+  }
+}
