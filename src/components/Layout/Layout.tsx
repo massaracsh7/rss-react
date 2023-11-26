@@ -13,7 +13,7 @@ interface AppProps {
 const Layout: React.FC<AppProps> = ({ children }) => {
   return (
     <div className='container'>
-      <div className='main-page' title='main page'>
+      <div className='main-page'>
         <Header />
         <div className={styles['main__flex']}>
           <Search />

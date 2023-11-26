@@ -1,8 +1,3 @@
-const Error = () => (
-  <>
-    <h1>404</h1>
-    <h2>Something is going wrong...</h2>
-  </>
-);
-
-export default Error;
+export default function Page404() {
+  return <h1 data-testid='error-page'>404 Not Found</h1>;
+}

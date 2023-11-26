@@ -46,7 +46,7 @@ export default function Home(data: DataSSP) {
       );
     return (
       <>
-        <div className={styles['main__flex']}>
+        <div className={styles['main__flex']} title='main page'>
           <Pagination
             currentPage={curPage}
             prevPage={apiData.data.info.prev}
