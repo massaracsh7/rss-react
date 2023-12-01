@@ -1,12 +1,35 @@
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+
+import store from '../store';
+
 export interface DataForm {
   name: string;
   age: number;
   email: string;
-  password: string;
   gender: Gender;
   accept: boolean;
   picture: string;
   country: string;
+  password: string;
+  confirmPassword: string;
 }
 
 export type Gender = 'unknown' | 'Female' | 'Male' | 'Genderless';
+
+export interface DataForm2 {
+  name: string;
+  age: number;
+  email: string;
+  gender: string;
+  picture: string;
+  password: string;
+  confirmPassword: string;
+  accept: boolean;
+  country: string;
+}
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppStore = typeof store;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppDispatch: () => AppDispatch = useDispatch;

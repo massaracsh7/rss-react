@@ -3,15 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { DataForm } from '../types/types';
 
-const initialState: DataForm = {
-  name: '',
-  age: 0,
-  email: '',
-  password: '',
-  gender: 'unknown',
-  accept: false,
-  picture: '',
-  country: '',
+const initialState = {
+  cards: [] as DataForm[],
 };
 
 export const Slice = createSlice({
@@ -19,14 +12,7 @@ export const Slice = createSlice({
   initialState,
   reducers: {
     setForm(state, action) {
-      state.name = action.payload.name;
-      state.age = action.payload.age;
-      state.email = action.payload.email;
-      state.password = action.payload.password;
-      state.gender = action.payload.gender;
-      state.accept = action.payload.accept;
-      state.picture = action.payload.picture;
-      state.country = action.payload.coutry;
+      state.cards = [...state.cards, action.payload];
     },
   },
 });
