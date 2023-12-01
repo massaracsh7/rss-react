@@ -1,107 +1,37 @@
-import React, { ChangeEvent, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 
 import { setForm } from '../../store/Slice';
-import { DataForm2, useAppDispatch, useAppSelector } from '../../types/types';
-
-// yup schema
-const schema = yup.object().shape({
-  name: yup.string().required('Name is a required field'),
-  age: yup.number().required('Age is a required field'),
-  email: yup.string().required(' is required to complete').email({
-    message: ' is invalid. Please enter a valid email address(e.g., user@example.com)',
-  }),
-  gender: yup.string().required('gender is a required field'),
-  picture: yup.string().required('File is required'),
-  country: yup.string().required('country is a required field'),
-  password: yup
-    .string()
-    .min(8, 'Must Contain 8 Characters')
-    .required()
-    .matches(/^(?=.*[a-z])/, ' Must Contain One Lowercase Character')
-    .matches(/^(?=.*[A-Z])/, '  Must Contain One Uppercase Character')
-    .matches(/^(?=.*[0-9])/, '  Must Contain One Number Character')
-    .matches(/^(?=.*[!@#$%^&*])/, '  Must Contain  One Special Case Character'),
-  confirmPassword: yup
-    .string()
-    .required()
-    .oneOf([yup.ref('password')], 'Passwords must match'),
-  accept: yup
-    .boolean()
-    .oneOf(
-      [true],
-      'You need to accept our Terms of Service and Privacy Policy to be able to proceed.',
-    )
-    .required(),
-});
-
-const file2Base64 = (file: Blob): Promise<string> => {
-  return new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result?.toString() || '');
-    reader.onerror = (error) => reject(error);
-  });
-};
+import { DataForm2, useAppDispatch } from '../../types/types';
+import { AutoComplete } from './autocomplete';
+import { schema } from './schema';
+import { uploadImage } from './uploadImage';
 
 export const HookForm: React.FC = () => {
   const {
     register,
     setValue,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<DataForm2>({
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
 
-  const [search, setSearch] = useState({
-    text: '',
-    suggestions: [''],
-  });
-  const [isComponentVisible, setIsComponentVisible] = useState(true);
-
-  const list = useAppSelector((state) => state.store.countryReducer);
-
-  const onTextChanged = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    let suggestions = [''];
-    if (value.length > 0) {
-      const regex = new RegExp(`^${value}`, 'i');
-      suggestions = list.filter((v: string) => regex.test(v));
-    }
-    setIsComponentVisible(true);
-    setSearch({ suggestions, text: value });
-  };
-
-  const suggestionSelected = (value: string) => {
-    setIsComponentVisible(false);
-    setSearch({
-      text: value,
-      suggestions: [],
-    });
-    setValue('country', value);
-  };
-
-  const { suggestions } = search;
-
-  const [url, setUrl] = useState('');
-
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: DataForm2) => {
     dispatch(setForm(data));
+    navigate('/', { replace: true });
   };
 
-  const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const file = event.target.files && event.target.files[0];
-      const base64 = await file2Base64(file);
-      setUrl(base64);
-    }
+  const handleCountry = (value: string) => {
+    setValue('country', value);
+    register('country', { value: value });
   };
 
   return (
@@ -133,12 +63,11 @@ export const HookForm: React.FC = () => {
       <label>Picture</label>
       <input
         type='file'
-        onChange={(e) => {
-          uploadImage(e);
+        onChange={async (event) => {
+          const value = await uploadImage(event);
+          value && setValue('picture', value);
         }}
       />
-      <h6>Image Preview:</h6>
-      <textarea value={url} {...register('picture')} />
       <div className='reg-form__flex'>
         <div>
           <label htmlFor='password' className='reg-form__label-pass'>
@@ -169,30 +98,10 @@ export const HookForm: React.FC = () => {
       </div>
       <label htmlFor='accept'> Agree</label>
       <input type='checkbox' id='accept' {...register('accept')} />
-      <div>
-        <div onClick={() => setIsComponentVisible(false)}></div>
-        <input
-          id='input'
-          autoComplete='off'
-          value={search.text}
-          {...register('country')}
-          onChange={onTextChanged}
-        />
-        (
-        {suggestions.length > 0 && isComponentVisible && (
-          <ul>
-            {suggestions.map((item: string, index) => (
-              <li key={index}>
-                <button key={index} onClick={() => suggestionSelected(item)}>
-                  {item}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-        )
-      </div>
-      <input type='submit' />
+      <AutoComplete handleCountry={handleCountry} />
+      <button type='submit' disabled={!isValid}>
+        Submit
+      </button>
     </form>
   );
 };
