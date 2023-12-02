@@ -15,7 +15,7 @@ export interface DataForm {
   confirmPassword: string;
 }
 
-export type Gender = 'unknown' | 'Female' | 'Male' | 'Genderless';
+export type Gender = 'Other' | 'Female' | 'Male';
 
 export interface DataForm2 {
   name: string;
@@ -35,7 +35,7 @@ export type AppStore = typeof store;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch: () => AppDispatch = useDispatch;
 
-export interface FormRefsObject {
+export interface FormObject {
   nameRef: RefObject<HTMLInputElement>;
   ageRef: RefObject<HTMLInputElement>;
   emailRef: RefObject<HTMLInputElement>;
@@ -45,4 +45,16 @@ export interface FormRefsObject {
   acceptRef: RefObject<HTMLInputElement>;
   pictureRef: MutableRefObject<string | null>;
   countryRef: MutableRefObject<string | null>;
+}
+
+export interface errorObject {
+  name?: string;
+  age?: string;
+  email?: string;
+  gender?: string;
+  accept?: string;
+  country?: string;
+  picture?: string;
+  password?: string;
+  confirmPassword?: string;
 }

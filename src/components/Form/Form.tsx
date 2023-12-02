@@ -1,16 +1,17 @@
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ValidationError } from 'yup';
 
 import { setForm } from '../../store/Slice';
-import { FormRefsObject, useAppDispatch } from '../../types/types';
+import { FormObject, errorObject, useAppDispatch } from '../../types/types';
 import { AutoComplete } from '../../utils/autocomplete';
+import useCreateForm from '../../utils/createForm';
 import { schema } from '../../utils/schema';
 import { uploadImage } from '../../utils/uploadImage';
-import useFormRefs from './useFormref';
+import './style.css';
 
-function FormUncontrolled(): ReactNode {
+export const Form: React.FC = () => {
   const {
     nameRef,
     ageRef,
@@ -21,30 +22,17 @@ function FormUncontrolled(): ReactNode {
     acceptRef,
     pictureRef,
     countryRef,
-  }: FormRefsObject = useFormRefs();
-
-  type tplotOptions = {
-    name?: string;
-    age?: string;
-    email?: string;
-    gender?: string;
-    accept?: string;
-    country?: string;
-    picture?: string;
-    password?: string;
-    confirmPassword?: string;
-  };
+  }: FormObject = useCreateForm();
 
   const handleCountry = (value: string) => {
     countryRef.current = value;
   };
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const [errors, setErrors] = useState<tplotOptions>({});
+  const [errors, setErrors] = useState<errorObject>({});
 
-  const [err, setErr] = useState('');
+  const [errorImage, setErrorImage] = useState('');
 
   return (
     <div>
@@ -97,15 +85,15 @@ function FormUncontrolled(): ReactNode {
             onChange={async (event) => {
               const value = await uploadImage(event);
               if (value && value.startsWith('Error')) {
-                setErr(value);
+                setErrorImage(value);
               } else {
-                setErr('');
+                setErrorImage('');
                 pictureRef.current = value ?? null;
               }
             }}
           />
           {errors.picture && <p>{errors.picture}</p>}
-          {err && <p>{err}</p>}
+          {errorImage && <p>{errorImage}</p>}
         </div>
         <div>
           <label htmlFor='countries'>Country</label>
@@ -149,7 +137,7 @@ function FormUncontrolled(): ReactNode {
       dispatch(setForm(data));
       navigate('/', { replace: true });
     } catch (error) {
-      const validationErrors: tplotOptions = {};
+      const validationErrors: errorObject = {};
       if (error instanceof ValidationError) {
         error.inner.forEach((error) => {
           console.log(error.path, error.message);
@@ -162,6 +150,4 @@ function FormUncontrolled(): ReactNode {
       }
     }
   }
-}
-
-export default FormUncontrolled;
+};

@@ -9,6 +9,7 @@ import { DataForm2, useAppDispatch } from '../../types/types';
 import { AutoComplete } from '../../utils/autocomplete';
 import { schema } from '../../utils/schema';
 import { uploadImage } from '../../utils/uploadImage';
+import './style.css';
 
 export const HookForm: React.FC = () => {
   const {
@@ -36,32 +37,35 @@ export const HookForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>Name</label>
-      <input {...register('name')} />
-      {errors.name && <p>{errors.name.message}</p>}
-      <label>Age</label>
-      <input {...register('age')} type='number' />
-      {errors.age && <p>{errors.age.message}</p>}
-      <label>Email</label>
-      <input {...register('email')} />
-      {errors.email && <p>{errors.email.message}</p>}
-      {errors.gender && <p className='reg-form__error'>{errors.gender.message}</p>}
-      <label htmlFor='male'>Male</label>{' '}
-      <input {...register('gender')} id='male' type='radio' name='gender' value='Male' />
-      <label htmlFor='female'>Female</label>{' '}
-      <input {...register('gender')} id='female' type='radio' name='gender' value='Female' />
-      <label htmlFor='genderless'>genderless</label>{' '}
+    <form className='form' onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor='name'>Name</label>
+      {errors.name && <span className='form__error'>{errors.name.message}</span>}
+      <input className='form__input' id='name' {...register('name')} />
+      <label htmlFor='age'>Age</label>
+      {errors.age && <span className='form__error'>{errors.age.message}</span>}
+      <input className='form__input' id='age' {...register('age')} type='number' />
+      <label>Email</label>{' '}
+      {errors.email && <span className='form__error'>{errors.email.message}</span>}
       <input
-        {...register('gender')}
-        id='genderless'
-        type='radio'
-        name='gender'
-        value='genderless'
+        className='form__input'
+        id='email'
+        {...register('email')}
+        placeholder='email@gmail.com'
       />
-      <label htmlFor='unknown'>unknown</label>{' '}
-      <input {...register('gender')} id='unknown' type='radio' name='gender' value='unknown' />
-      <label>Picture</label>
+      <p>
+        <strong>Choose your gender </strong>{' '}
+        {errors.gender && <span className='form__error'>{errors.gender.message}</span>}
+      </p>
+      <div className='form__flex'>
+        <label htmlFor='male'>Male</label>
+        <input {...register('gender')} id='male' type='radio' name='gender' value='Male' />
+        <label htmlFor='female'>Female</label>
+        <input {...register('gender')} id='female' type='radio' name='gender' value='Female' />
+        <label htmlFor='other'>Other</label>
+        <input {...register('gender')} id='other' type='radio' name='gender' value='Other' />
+      </div>
+      <label>Upload your avatar </label>
+      {err && <span className='form__error'>{err}</span>}
       <input
         type='file'
         onChange={async (event) => {
@@ -74,39 +78,40 @@ export const HookForm: React.FC = () => {
           }
         }}
       />
-      {err && <p>{err}</p>}
-      <div className='reg-form__flex'>
-        <div>
-          <label htmlFor='password' className='reg-form__label-pass'>
-            Password
-            <input
-              {...register('password')}
-              type='password'
-              id='password'
-              className='reg-form__input'
-            />
-          </label>
-          {errors.password && <span className='reg-form__error'>{errors.password.message}</span>}
-        </div>
-        <div>
-          <label htmlFor='confirmPassword' className='reg-form__label-pass'>
-            Confirm Password:
-            <input
-              type='password'
-              {...register('confirmPassword')}
-              id='conformPassword'
-              className='reg-form__input'
-            />
-          </label>
-          {errors.confirmPassword && (
-            <span className='reg-form__error'>{errors.confirmPassword?.message}</span>
-          )}
-        </div>
+      <div className='form__box'>
+        <label htmlFor='password' className='form__label-pass'>
+          Password{' '}
+        </label>
+        {errors.password && <span className='form__error'>{errors.password.message}</span>}
+        <input {...register('password')} type='password' id='password' className='form__input' />
       </div>
-      <label htmlFor='accept'> Agree</label>
-      <input type='checkbox' id='accept' {...register('accept')} />
-      <AutoComplete handleCountry={handleCountry} />
-      <button type='submit' disabled={!isValid}>
+      <div className='form__box'>
+        <label htmlFor='confirmPassword' className='form__label-pass'>
+          Confirm Password:{' '}
+        </label>
+        {errors.confirmPassword && (
+          <span className='form__error'>{errors.confirmPassword?.message}</span>
+        )}
+        <input
+          type='password'
+          {...register('confirmPassword')}
+          id='conformPassword'
+          className='form__input'
+        />
+      </div>
+      <div className='form__box'>
+        <input type='checkbox' id='accept' {...register('accept')} />
+        <label htmlFor='accept'> Accept our Terms of Service and Privacy Policy</label>{' '}
+        {errors.accept && <span className='form__error'>{errors.accept.message}</span>}
+      </div>
+      <div>
+        <p>
+          <strong>Enter your country: </strong>{' '}
+          {errors.country && <span className='form__error'>{errors.country.message}</span>}
+        </p>
+        <AutoComplete handleCountry={handleCountry} />
+      </div>
+      <button className='form__btn' type='submit' disabled={!isValid}>
         Submit
       </button>
     </form>

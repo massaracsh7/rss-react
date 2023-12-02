@@ -1,8 +1,8 @@
 import { MutableRefObject, RefObject, useRef } from 'react';
 
-import { FormRefsObject } from '../../types/types';
+import { FormObject } from '../types/types';
 
-function useFormRefs(): FormRefsObject {
+function useCreateForm(): FormObject {
   const nameRef: RefObject<HTMLInputElement> = useRef(null);
   const ageRef: RefObject<HTMLInputElement> = useRef(null);
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -26,4 +26,4 @@ function useFormRefs(): FormRefsObject {
   };
 }
 
-export default useFormRefs;
+export default useCreateForm;

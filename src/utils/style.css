@@ -1,0 +1,34 @@
+.country__item {
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: #fff;
+}
+
+.country__item:hover {
+  background-color: #919191;
+}
+
+.country__input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 0.3125rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  margin: 0.6rem 0;
+}
+
+.country__input:placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.country__input:hover {
+  border: 1px solid #304ffe;
+  outline: 1px solid #304ffe;
+}
+
+.country__list {
+  background-color: #fff;
+  margin-bottom: 1rem;
+}
