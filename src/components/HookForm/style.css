@@ -86,3 +86,19 @@ label {
   font-size: 16px;
   font-weight: 600;
 }
+
+.yellow {
+  color: yellow;
+}
+
+.red {
+  color: red;
+}
+
+.orange {
+  color: orange;
+}
+
+.green {
+  color: green;
+}

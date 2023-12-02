@@ -1,17 +1,25 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
+import './style.css';
 
 export default function Header() {
   return (
     <header className='header'>
       <ul className='menu'>
         <li>
-          <Link to='/'>Main</Link>
+          <NavLink className={({ isActive }) => (isActive ? 'active' : '')} to='/'>
+            Main
+          </NavLink>
         </li>
         <li>
-          <Link to='form'>Form</Link>
+          <NavLink className={({ isActive }) => (isActive ? 'active' : '')} to='form'>
+            Form
+          </NavLink>
         </li>
         <li>
-          <Link to='hookform'>HookForm</Link>
+          <NavLink className={({ isActive }) => (isActive ? 'active' : '')} to='hookform'>
+            HookForm
+          </NavLink>
         </li>
       </ul>
     </header>

@@ -7,20 +7,6 @@ export interface DataForm {
   name: string;
   age: number;
   email: string;
-  gender: Gender;
-  accept: boolean;
-  picture: string;
-  country: string;
-  password: string;
-  confirmPassword: string;
-}
-
-export type Gender = 'Other' | 'Female' | 'Male';
-
-export interface DataForm2 {
-  name: string;
-  age: number;
-  email: string;
   gender: string;
   picture: string;
   password: string;
@@ -41,7 +27,7 @@ export interface FormObject {
   emailRef: RefObject<HTMLInputElement>;
   passwordRef: RefObject<HTMLInputElement>;
   confirmPasswordRef: RefObject<HTMLInputElement>;
-  genderRef: RefObject<HTMLInputElement>;
+  genderRef: MutableRefObject<string | null>;
   acceptRef: RefObject<HTMLInputElement>;
   pictureRef: MutableRefObject<string | null>;
   countryRef: MutableRefObject<string | null>;

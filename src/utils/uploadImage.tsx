@@ -12,7 +12,9 @@ export const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) =>
     if (file.size / 1024 > maxSize) {
       return `Error - Image should be less than ${maxSize / 1000} MB`;
     }
+
     const base64 = await file64(file);
+    console.log(base64);
     return base64;
   }
 };

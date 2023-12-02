@@ -1,0 +1,12 @@
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.header {
+  padding: 20px;
+}
+
+.active {
+  color: red;
+}

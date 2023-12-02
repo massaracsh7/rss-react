@@ -1,0 +1,21 @@
+.main__title {
+  margin-bottom: 2rem;
+}
+
+.cards__img {
+  width: 50%;
+}
+
+.cards__item:last-child {
+  border: 5px dotted red;
+}
+
+.cards__item {
+  padding: 1rem;
+}
+
+.cards__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}

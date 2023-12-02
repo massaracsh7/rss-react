@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ValidationError } from 'yup';
@@ -34,77 +34,91 @@ export const Form: React.FC = () => {
 
   const [errorImage, setErrorImage] = useState('');
 
+  const onOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    genderRef.current = e.target.value;
+  };
+
   return (
-    <div>
-      <form action='#' onSubmit={handlerSubmit}>
-        <div>
-          <label htmlFor='name'>Name:</label>
-          <input id='name' type='text' ref={nameRef} />
-          {errors.name && <p>{errors.name}</p>}
-        </div>
-        <div>
-          <label htmlFor='age'>Age:</label>
-          <input id='age' type='number' ref={ageRef} />
-          {errors.age && <p>{errors.age}</p>}
-        </div>
-        <div>
-          <label htmlFor='email'>Email:</label>
-          <input id='email' type='email' ref={emailRef} />
-          {errors.email && <p>{errors.email}</p>}
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input id='password' type='password' ref={passwordRef} />
-          {errors.password && <p>{errors.password}</p>}
-        </div>
-        <div>
-          <label htmlFor='confirmPassword'>Password repeat:</label>
-          <input id='confirmPassword' type='password' ref={confirmPasswordRef} />
-          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        </div>
-        <div>
-          <label htmlFor='male'>Male</label>
-          <input ref={genderRef} id='male' type='radio' name='gender' value='Male' />
-          <label htmlFor='female'>Female</label>
-          <input ref={genderRef} id='female' type='radio' name='gender' value='Female' />
-          <label htmlFor='genderless'>genderless</label>
-          <input ref={genderRef} id='genderless' type='radio' name='gender' value='genderless' />
-          <label htmlFor='unknown'>unknown</label>
-          <input ref={genderRef} id='unknown' type='radio' name='gender' value='unknown' />
-        </div>
-        <div>
-          <label htmlFor='accept'>Accept Terms and Conditions</label>
-          <input id='accept' type='checkbox' ref={acceptRef} />
-          {errors.accept && <p>{errors.accept}</p>}
-        </div>
-        <div>
-          <label htmlFor='picture'>Avatar</label>
-          <input
-            id='picture'
-            type='file'
-            onChange={async (event) => {
-              const value = await uploadImage(event);
-              if (value && value.startsWith('Error')) {
-                setErrorImage(value);
-              } else {
-                setErrorImage('');
-                pictureRef.current = value ?? null;
-              }
-            }}
-          />
-          {errors.picture && <p>{errors.picture}</p>}
-          {errorImage && <p>{errorImage}</p>}
-        </div>
-        <div>
-          <label htmlFor='countries'>Country</label>
-          <AutoComplete handleCountry={handleCountry} />
-          {errors.country && <p>{errors.country}</p>}
-        </div>
-        <div>
-          <button type='submit'>Submit</button>
-        </div>
-      </form>
-    </div>
+    <form className='form' onSubmit={handlerSubmit}>
+      <label htmlFor='name'>Name</label>
+      {errors.name && <span className='form__error'>{errors.name}</span>}
+      <input className='form__input' id='name' ref={nameRef} />
+
+      <label htmlFor='age'>Age</label>
+      {errors.age && <span className='form__error'>{errors.age}</span>}
+      <input className='form__input' id='age' ref={ageRef} type='number' />
+
+      <label>Email</label>
+      {errors.email && <span className='form__error'>{errors.email}</span>}
+      <input className='form__input' id='email' ref={emailRef} placeholder='email@gmail.com' />
+
+      <p>
+        <strong>Choose your gender </strong>
+        {errors.gender && <span className='form__error'>{errors.gender}</span>}
+      </p>
+      <div className='form__flex'>
+        <label htmlFor='male'>Male</label>
+        <input onChange={onOptionChange} id='male' type='radio' name='gender' value='Male' />
+        <label htmlFor='female'>Female</label>
+        <input onChange={onOptionChange} id='female' type='radio' name='gender' value='Female' />
+        <label htmlFor='other'>Other</label>
+        <input onChange={onOptionChange} id='other' type='radio' name='gender' value='Other' />
+      </div>
+
+      <label>Upload your avatar </label>
+      {errors.picture && <span className='form__error'>{errors.picture}</span>}
+      {errorImage && <span className='form__error'>{errorImage}</span>}
+      <div className='form__box'>
+        <input
+          id='picture'
+          type='file'
+          onChange={async (event) => {
+            const value = await uploadImage(event);
+            if (value && value.startsWith('Error')) {
+              setErrorImage(value);
+            } else {
+              setErrorImage('');
+              pictureRef.current = value ?? null;
+            }
+          }}
+        />
+      </div>
+
+      <div className='form__box'>
+        <label htmlFor='password'>Password</label>
+        {errors.password && <span className='form__error'>{errors.password}</span>}
+        <input ref={passwordRef} type='password' id='password' className='form__input' />
+      </div>
+
+      <div className='form__box'>
+        <label htmlFor='confirmPassword'>Confirm Password:</label>
+        {errors.confirmPassword && <span className='form__error'>{errors.confirmPassword}</span>}
+        <input
+          type='password'
+          ref={confirmPasswordRef}
+          id='conformPassword'
+          className='form__input'
+        />
+      </div>
+
+      <div className='form__box'>
+        <input type='checkbox' id='accept' ref={acceptRef} />
+        <label htmlFor='accept'> Accept our Terms of Service and Privacy Policy</label>
+        {errors.accept && <span className='form__error'>{errors.accept}</span>}
+      </div>
+
+      <div>
+        <p>
+          <strong>Enter your country: </strong>
+          {errors.country && <span className='form__error'>{errors.country}</span>}
+        </p>
+        <AutoComplete handleCountry={handleCountry} />
+      </div>
+
+      <button className='form__btn' type='submit'>
+        Submit
+      </button>
+    </form>
   );
 
   async function handlerSubmit(e: React.FormEvent) {
@@ -112,7 +126,7 @@ export const Form: React.FC = () => {
     const name = nameRef.current?.value;
     const age = ageRef.current?.value;
     const email = emailRef.current?.value;
-    const gender = genderRef.current?.value;
+    const gender = genderRef.current;
     const accept = acceptRef.current?.checked;
     const country = countryRef.current;
     const picture = pictureRef.current;
@@ -140,7 +154,6 @@ export const Form: React.FC = () => {
       const validationErrors: errorObject = {};
       if (error instanceof ValidationError) {
         error.inner.forEach((error) => {
-          console.log(error.path, error.message);
           validationErrors[error.path as keyof typeof validationErrors]
             ? (validationErrors[error.path as keyof typeof validationErrors] =
                 validationErrors[error.path as keyof typeof validationErrors] + ' ' + error.message)
