@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,9 +6,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { setForm } from '../../store/Slice';
 import { DataForm2, useAppDispatch } from '../../types/types';
-import { AutoComplete } from './autocomplete';
-import { schema } from './schema';
-import { uploadImage } from './uploadImage';
+import { AutoComplete } from '../../utils/autocomplete';
+import { schema } from '../../utils/schema';
+import { uploadImage } from '../../utils/uploadImage';
 
 export const HookForm: React.FC = () => {
   const {
@@ -23,6 +23,7 @@ export const HookForm: React.FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [err, setErr] = useState('');
 
   const onSubmit = (data: DataForm2) => {
     dispatch(setForm(data));
@@ -65,9 +66,15 @@ export const HookForm: React.FC = () => {
         type='file'
         onChange={async (event) => {
           const value = await uploadImage(event);
-          value && setValue('picture', value);
+          if (value && value.startsWith('Error')) {
+            setErr(value);
+          } else {
+            setErr('');
+            value && setValue('picture', value);
+          }
         }}
       />
+      {err && <p>{err}</p>}
       <div className='reg-form__flex'>
         <div>
           <label htmlFor='password' className='reg-form__label-pass'>

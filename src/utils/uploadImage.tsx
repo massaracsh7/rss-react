@@ -8,11 +8,11 @@ export const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) =>
     const file = event.target.files && event.target.files[0];
     if (!allowedMimes.includes(file.type)) {
       // if allowedMimes array does not have the extension
-      console.log('Only png,jpg,jpeg allowed');
+      return 'Error - Only png,jpg,jpeg allowed';
     }
     if (file.size / 1024 > maxV) {
       // if the file size is gratter than maxMb
-      console.log(`Image should be less than ${maxV / 1000} MB`);
+      return `Error - Image should be less than ${maxV / 1000} MB`;
     }
     const base64 = await file64(file);
     return base64;
