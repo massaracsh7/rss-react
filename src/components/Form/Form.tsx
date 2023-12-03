@@ -7,6 +7,7 @@ import { setForm } from '../../store/Slice';
 import { FormObject, errorObject, useAppDispatch } from '../../types/types';
 import { AutoComplete } from '../../utils/autocomplete';
 import useCreateForm from '../../utils/createForm';
+import { handlePassword } from '../../utils/handlePassword';
 import { schema } from '../../utils/schema';
 import { uploadImage } from '../../utils/uploadImage';
 import './style.css';
@@ -37,6 +38,9 @@ export const Form: React.FC = () => {
   const onOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     genderRef.current = e.target.value;
   };
+
+  const [strength, setStrength] = useState('');
+  const [color, setColor] = useState('');
 
   return (
     <form className='form' onSubmit={handlerSubmit}>
@@ -87,6 +91,7 @@ export const Form: React.FC = () => {
       <div className='form__box'>
         <label htmlFor='password'>Password</label>
         {errors.password && <span className='form__error'>{errors.password}</span>}
+        <span className={color}> {strength}</span>
         <input ref={passwordRef} type='password' id='password' className='form__input' />
       </div>
 
@@ -132,6 +137,7 @@ export const Form: React.FC = () => {
     const picture = pictureRef.current;
     const password = passwordRef.current?.value;
     const confirmPassword = confirmPasswordRef.current?.value;
+    console.log(password);
     try {
       await schema.validate(
         { name, age, email, gender, accept, country, picture, password, confirmPassword },
@@ -148,6 +154,7 @@ export const Form: React.FC = () => {
         password,
         confirmPassword,
       };
+
       dispatch(setForm(data));
       navigate('/', { replace: true });
     } catch (error) {
@@ -160,6 +167,9 @@ export const Form: React.FC = () => {
             : (validationErrors[error.path as keyof typeof validationErrors] = error.message);
         });
         setErrors(validationErrors);
+        const answer = handlePassword(validationErrors.password, passwordRef.current?.value);
+        setStrength(answer ? answer[0] : '');
+        setColor(answer ? answer[1] : '');
       }
     }
   }

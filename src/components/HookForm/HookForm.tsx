@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { setForm } from '../../store/Slice';
 import { DataForm, useAppDispatch } from '../../types/types';
 import { AutoComplete } from '../../utils/autocomplete';
+import { handlePassword } from '../../utils/handlePassword';
 import { schema } from '../../utils/schema';
 import { uploadImage } from '../../utils/uploadImage';
 import './style.css';
@@ -41,36 +41,11 @@ export const HookForm: React.FC = () => {
   const [strength, setStrength] = useState('');
   const [color, setColor] = useState('');
 
-  const handlePassword = () => {
-    if (errors.password?.message === 'Must Contain One Lowercased Character') {
-      setStrength('weak password');
-      setColor('red');
-    }
-    if (errors.password?.message === 'Must Contain One Uppercased Character') {
-      setStrength('weak password');
-      setColor('red');
-    }
-    if (errors.password?.message === 'Must Contain One Number Character') {
-      setStrength('average password');
-      setColor('yellow');
-    }
-    if (errors.password?.message === 'Must Contain  One Special Case Character') {
-      setStrength('good password');
-      setColor('orange');
-    }
-    if (errors.password?.message === 'Must Contain  One Special Case Character') {
-      setStrength('good password');
-      setColor('orange');
-    }
-    if (!errors.password && getValues('password')) {
-      setStrength('strong password');
-      setColor('green');
-    }
-  };
-
   useEffect(() => {
-    handlePassword();
-  }, [handlePassword, errors.password, strength]);
+    const answer = handlePassword(errors.password?.message, getValues('password'));
+    setStrength(answer ? answer[0] : '');
+    setColor(answer ? answer[1] : '');
+  }, [errors.password, strength, getValues]);
 
   return (
     <form className='form' onSubmit={handleSubmit(onSubmit)}>
@@ -118,8 +93,8 @@ export const HookForm: React.FC = () => {
       </div>
       <div className='form__box'>
         <label htmlFor='password'>Password</label>
-        <span className={color}>{strength}</span>
         {errors.password && <span className='form__error'>{errors.password.message}</span>}
+        <span className={color}> {strength}</span>
         <input {...register('password')} type='password' id='password' className='form__input' />
       </div>
       <div className='form__box'>
