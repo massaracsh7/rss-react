@@ -7,12 +7,13 @@
   padding: 1rem;
   width: 100%;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
   background-color: #fff;
 }
 
 .country__item:hover {
-  background-color: #919191;
+  color: #919191;
+  text-decoration: underline;
 }
 
 .country__input {
@@ -38,4 +39,5 @@
   position: absolute;
   top: 50px;
   left: 0;
+  width: 100%;
 }
