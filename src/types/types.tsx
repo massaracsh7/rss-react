@@ -15,12 +15,6 @@ export interface DataForm {
   country: string;
 }
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
-export type AppStore = typeof store;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-export const useAppDispatch: () => AppDispatch = useDispatch;
-
 export interface FormObject {
   nameRef: RefObject<HTMLInputElement>;
   ageRef: RefObject<HTMLInputElement>;
@@ -44,3 +38,9 @@ export interface errorObject {
   password?: string;
   confirmPassword?: string;
 }
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppStore = typeof store;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppDispatch: () => AppDispatch = useDispatch;
