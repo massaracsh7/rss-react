@@ -3,16 +3,19 @@
 }
 
 .cards__img {
-  width: 50%;
-}
-
-.cards__item:last-child {
-  border: 5px dotted red;
+  width: 100%;
 }
 
 .cards__item {
   padding: 1rem;
+  border: 2px dotted black;
 }
+
+.cards__item--active {
+  padding: 1rem;
+  border: 2px dotted red;
+}
+
 
 .cards__list {
     display: grid;

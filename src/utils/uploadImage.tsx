@@ -14,7 +14,6 @@ export const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) =>
     }
 
     const base64 = await file64(file);
-    console.log(base64);
     return base64;
   }
 };

@@ -51,6 +51,8 @@ input:invalid {
   box-shadow: 0 0 5px #656565;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 50px;
+  margin-left: 10px;
 }
 
 .form__btn:hover {
@@ -74,12 +76,6 @@ input:invalid {
 
 input[type='checkbox'] {
   margin-right: 0.6rem;
-}
-
-fieldset {
-  width: 50%;
-  border-radius: 0.3125rem;
-  margin: 0.6rem 0;
 }
 
 label {

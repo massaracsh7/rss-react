@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
-import { useAppSelector } from '../types/types';
+import { useAppSelector } from '../../types/types';
 import './style.css';
 
 interface Props {
@@ -38,8 +38,7 @@ export const AutoComplete = ({ handleCountry }: Props) => {
 
   const { arr } = search;
   return (
-    <div>
-      <div onClick={() => setIsOpen(false)}></div>
+    <div className='country__wrapper'>
       <input
         className='country__input'
         id='input'

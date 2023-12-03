@@ -5,12 +5,12 @@ import { ValidationError } from 'yup';
 
 import { setForm } from '../../store/Slice';
 import { FormObject, errorObject, useAppDispatch } from '../../types/types';
-import { AutoComplete } from '../../utils/autocomplete';
 import useCreateForm from '../../utils/createForm';
 import { handlePassword } from '../../utils/handlePassword';
 import { schema } from '../../utils/schema';
 import { uploadImage } from '../../utils/uploadImage';
-import './style.css';
+import { AutoComplete } from '../AutoComplete/autocomplete';
+import '../HookForm/style.css';
 
 export const Form: React.FC = () => {
   const {
@@ -137,7 +137,6 @@ export const Form: React.FC = () => {
     const picture = pictureRef.current;
     const password = passwordRef.current?.value;
     const confirmPassword = confirmPasswordRef.current?.value;
-    console.log(password);
     try {
       await schema.validate(
         { name, age, email, gender, accept, country, picture, password, confirmPassword },

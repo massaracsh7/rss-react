@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <div className='container'>
       <Header />
-      <main className='child-overlay'>
+      <main className='main'>
         <Outlet></Outlet>
       </main>
     </div>
