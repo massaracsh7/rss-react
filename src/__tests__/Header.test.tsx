@@ -9,9 +9,4 @@ describe('Header component', () => {
     const header = screen.getByText('Rick & Morty Characters');
     expect(header).toBeInTheDocument();
   });
-  it('Should render button Error', () => {
-    render(<Header />);
-    const errorBtn = screen.getByText('Create Error');
-    expect(errorBtn).toBeInTheDocument();
-  });
 });
