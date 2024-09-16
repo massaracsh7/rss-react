@@ -1,7 +1,18 @@
 # Rick and Morty Project
 
 ### "Rick and Morty"
+
+![Screen ](public/screen.png)
+
 "Rick and Morty" is an animated sci-fi comedy series that follows the misadventures of an eccentric and alcoholic scientist, Rick Sanchez, and his good-hearted but easily influenced grandson, Morty Smith. The show blends dark humor with complex storytelling, exploring alternate dimensions, alien worlds, and philosophical dilemmas. Its unique blend of absurdity and wit has made it a cultural phenomenon with a dedicated fanbase.
+
+***************************
+
+## Deploy ##
+
+* [https://rss-react-delta.vercel.app](https://rss-react-delta.vercel.app)
+
+***************************
 
 ## About the Project
 
